@@ -5,7 +5,7 @@ public class Player {
     private Integer age; // Change to Integer to handle null values
 
     private String first_name;
-    private int id;
+    private int playerId;
     private String image_url;
     private String last_name;
     private String name;
@@ -13,7 +13,7 @@ public class Player {
     private String role;
     private String slug;
 
-    private CurrentTeam teamInfo;
+    private CurrentTeam teaminfo;
 
     private CurrentVideoGame currentGame;
 
@@ -41,12 +41,12 @@ public class Player {
         this.first_name = first_name;
     }
 
-    public int getId() {
-        return id;
+    public int getPlayerId() {
+        return playerId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPlayerId(int id) {
+        this.playerId = id;
     }
 
     public String getImage_url() {
@@ -98,14 +98,14 @@ public class Player {
     }
 
     public CurrentTeam getTeamInfo() {
-        return teamInfo;
+        return teaminfo;
     }
 
     public void setTeamInfo(CurrentTeam teamInfo) {
-        this.teamInfo = teamInfo;
+        this.teaminfo = teamInfo;
     }
 
-    public CurrentVideoGame getCurrentGame() {
+    public CurrentVideoGame getCurrentVideogame() {
         return currentGame;
     }
 
@@ -113,18 +113,27 @@ public class Player {
         this.currentGame = currentGame;
     }
 
-    public Player(boolean active, Integer age, String first_name, int id, String image_url, String last_name, String name, String nationality, String role, String slug, CurrentTeam teamInfo, CurrentVideoGame currentGame) {
+    public CurrentTeam getTeaminfo() {
+        return teaminfo;
+    }
+
+    public void setTeaminfo(CurrentTeam teaminfo) {
+        this.teaminfo = teaminfo;
+    }
+
+    public Player(boolean active, Integer age, String first_name, int id, String image_url, String last_name, String name, String nationality, String role, String slug, CurrentTeam teaminfo, CurrentVideoGame currentGame) {
         this.active = active;
         this.age = age;
         this.first_name = first_name;
-        this.id = id;
+        this.playerId = id;
         this.image_url = image_url;
         this.last_name = last_name;
         this.name = name;
         this.nationality = nationality;
         this.role = role;
         this.slug = slug;
-        this.teamInfo = teamInfo;
+        this.teaminfo = teaminfo;
         this.currentGame = currentGame;
     }
+
 }

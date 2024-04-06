@@ -1,3 +1,6 @@
+import org.json.JSONException;
+import org.json.JSONObject;
+
 public class CurrentTeam {
     private String acronym;
 
@@ -10,6 +13,10 @@ public class CurrentTeam {
     private String name;
 
     private String slug;
+
+    public CurrentTeam() {
+
+    }
 
 
     // Getters
@@ -37,7 +44,7 @@ public class CurrentTeam {
     }
 
     // Setters
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -64,6 +71,7 @@ public class CurrentTeam {
         return this;
     }
 
+
     public CurrentTeam(String acronym, int id, String imageUrl, String location, String name, String slug) {
         this.acronym = acronym;
         this.id = id;
@@ -71,6 +79,17 @@ public class CurrentTeam {
         this.location = location;
         this.name = name;
         this.slug = slug;
+    }
+
+    static CurrentTeam parseCurrentTeam(JSONObject teamObject) throws JSONException {
+        return new CurrentTeam(
+                teamObject.optString("acronym"),
+                teamObject.optInt("id"),
+                teamObject.optString("image_url"),
+                teamObject.optString("location"),
+                teamObject.getString("name"),
+                teamObject.getString("slug")
+        );
     }
 }
 

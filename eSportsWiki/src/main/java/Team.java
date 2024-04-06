@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class Team {
     private String acronym;
     private CurrentVideoGame current_videogame;
@@ -5,6 +7,8 @@ public class Team {
     private String image_url;
     private String location;
     private String name;
+
+    private List<Player> players;
     private String slug;
 
     // Constructor
@@ -16,6 +20,7 @@ public class Team {
         this.location = location;
         this.name = name;
         this.slug = slug;
+//        this.players = players; // Set the list of players
     }
 
     // Getters
@@ -74,5 +79,13 @@ public class Team {
 
     public void setSlug(String slug) {
         this.slug = slug;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
     }
 }

@@ -6,7 +6,7 @@ public class DatabaseUtils {
     private static final String PASSWORD = "$tarfox123";
 
     public static void displayTable(String tableName) {
-        try (Connection conn = DriverManager.getConnection(JDBC_URL,USERNAME, PASSWORD)) {
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
             // Define the SQL query to retrieve data
             String sqlQuery = "SELECT * FROM " + tableName;
 
@@ -75,8 +75,8 @@ public class DatabaseUtils {
             e.printStackTrace();
         }
     }
-
-    public static void main(String[] args) {
-        displayTable("playerList"); // Replace "playerList" with the desired table name
-    }
 }
+
+//    public static void main(String[] args) {
+//        displayTable("playerList"); // Replace "playerList" with the desired table name
+//    }

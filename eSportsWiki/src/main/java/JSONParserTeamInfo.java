@@ -11,31 +11,21 @@ public class JSONParserTeamInfo {
 
         try {
             for (int i = 0; i < jsonArray.length(); i++) {
-                JSONObject teamObject = jsonArray.getJSONObject(i);
+                JSONObject teamObject = jsonArray.optJSONObject(i);
 
                 // Parse team data from JSON object
-                String acronym = null; // Initialize imageUrl variable
-// Check if "image_url" exists and is not null
-                if (!teamObject.isNull("acronym")) {
-                    // "image_url" exists and is not null, so retrieve it as a string
-                    acronym = teamObject.getString("acronym");
-                }
-                JSONObject currentVideoGameObject = teamObject.getJSONObject("current_videogame");
-                CurrentVideoGame currentVideoGame = new CurrentVideoGame(currentVideoGameObject.getInt("id"), currentVideoGameObject.getString("name"), currentVideoGameObject.getString("slug"));
-                int id = teamObject.getInt("id");
-                String image_url = null; // Initialize imageUrl variable
-// Check if "image_url" exists and is not null
+                int id = teamObject.optInt("id");
+                String acronym = teamObject.optString("acronym");
+                JSONObject currentVideoGameObject = teamObject.optJSONObject("current_videogame");
+                CurrentVideoGame currentVideoGame = CurrentVideoGame.parseCurrentGame(currentVideoGameObject);
+                String image_url = teamObject.optString("image_url");
+                String location = teamObject.optString("location");
+                String name = teamObject.optString("name");
+                String slug = teamObject.optString("slug");
 
-
-                if (!teamObject.isNull("image_url")) {
-                    // "image_url" exists and is not null, so retrieve it as a string
-                    image_url = teamObject.getString("image_url");
-                }
-
-
-                String location = teamObject.getString("location");
-                String name = teamObject.getString("name");
-                String slug = teamObject.getString("slug");
+//                // Parse players for the team
+//                JSONArray playersArray = teamObject.optJSONArray("players");
+//                List<Player> players = JSONParserPlayer.parseJSON(playersArray);
 
                 // Create Team object and add to list
                 Team team = new Team(acronym, currentVideoGame, id, image_url, location, name, slug);
