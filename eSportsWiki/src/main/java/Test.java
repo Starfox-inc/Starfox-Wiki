@@ -62,8 +62,8 @@ public class Test {
 
 //         // CREATE TABLES USING TABLE DEFINITIONS FROM ABOVE
 //        CreateTables.createTable("playerlist", playerListColumns);
-//        CreateTables.createTable("teaminfo", current_videogameColumns);
-//        CreateTables.createTable("current_videogame", teaminfoColumns);
+//        CreateTables.createTable("current_videogame", current_videogameColumns);
+//        CreateTables.createTable("teaminfo", teaminfoColumns);
 //        CreateTables.createTable("codteams", teaminfoColumns);
 //        CreateTables.createTable("csteams", teaminfoColumns);
 //        CreateTables.createTable("lolteams", teaminfoColumns);
