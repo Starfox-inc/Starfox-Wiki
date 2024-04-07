@@ -1,5 +1,6 @@
 import org.json.JSONArray;
 
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -79,39 +80,45 @@ public class Test {
 //
 //        // Use the parsed data as needed
 //        teamToSQL.insertDataIntoDB(teaminfo, "teaminfo");
+//        // COD TEAMS
 //
 //        jsonArray = fetchDataFromAPI("https://api.pandascore.co/codmw/teams");
 //
 //        teaminfo = JSONParserTeamInfo.parseJSON(jsonArray);
 //
 //        teamToSQL.insertDataIntoDB(teaminfo, "codteams");
-
+//        // CS TEAMS
 //        jsonArray = fetchDataFromAPI("https://api.pandascore.co/csgo/teams");
 ////
 //        teaminfo = JSONParserTeamInfo.parseJSON(jsonArray);
 ////
 //        teamToSQL.insertDataIntoDB(teaminfo, "csteams");
-
+//        // LOL TEAMS
 //        jsonArray = fetchDataFromAPI("https://api.pandascore.co/lol/teams");
 //
 //        teaminfo = JSONParserTeamInfo.parseJSON(jsonArray);
 //
 //        teamToSQL.insertDataIntoDB(teaminfo, "lolteams");
-
+//        // VAL TEAMS
 //        jsonArray = fetchDataFromAPI("https://api.pandascore.co/valorant/teams");
 //
 //        teaminfo = JSONParserTeamInfo.parseJSON(jsonArray);
 //
 //        teamToSQL.insertDataIntoDB(teaminfo, "valteams");
 //
+//        // Player list
 //        JSONArray playerArray = fetchDataFromAPI("https://api.pandascore.co/players");
 //
 //        List<Player> playerList = JSONParserPlayer.parseJSON(playerArray);
 //
 //        playerToSQL.insertDataIntoDB(playerList, "playerlist");
 //
+//        // game list
+//        JSONArray gameListArray = fetchDataFromAPI("https://api.pandascore.co/videogames");
 //
-////
+//        List<CurrentVideoGame> gameList = JSONParserGameList.parseJSON(gameListArray);
+//
+//        gameListToSQL.insertDataIntoDB(gameList, "current_videogame");
 ////
 
         // // TESTING DATABASE TABLE CONTENTS
@@ -137,12 +144,12 @@ public class Test {
 //        System.out.println("\n\n\n");
 
 
-
+//        DatabaseUtils.displayTable("current_videogame");
 //
 //        System.out.println("\n\n\n");
 
 
-        DatabaseUtils.displayTable("playerlist");
+//        DatabaseUtils.displayTable("playerlist");
 
     }
 
