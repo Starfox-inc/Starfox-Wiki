@@ -1,8 +1,12 @@
+package com.Starfox.EsportsWiki.database;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+
+import com.Starfox.EsportsWiki.model.Player;
 
 public class playerToSQL {
     public static void insertDataIntoDB(List<Player> players, String gameName) throws SQLException {
@@ -30,8 +34,8 @@ public class playerToSQL {
                     insertStmt.setNull(11, java.sql.Types.INTEGER);
                 }
 
-                if (player.getCurrentVideogame() != null) {
-                    insertStmt.setInt(12, player.getCurrentVideogame().getId());
+                if (player.getCurrentGame() != null) {
+                    insertStmt.setInt(12, player.getCurrentGame().getId());
                 } else {
                     // Handle the case where currentVideogame is null (e.g., set a default value or use NULL)
                     insertStmt.setNull(12, java.sql.Types.INTEGER);

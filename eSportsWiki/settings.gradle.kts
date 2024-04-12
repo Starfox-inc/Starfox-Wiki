@@ -1,2 +1,1 @@
-rootProject.name = "test1"
-
+rootProject.name = "EsportsWiki"

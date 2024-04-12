@@ -1,4 +1,11 @@
-import java.sql.*;
+package com.Starfox.EsportsWiki.database;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 public class DatabaseUtils {
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/starfox";

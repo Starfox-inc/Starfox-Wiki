@@ -1,7 +1,11 @@
+package com.Starfox.EsportsWiki.model;
+
+import java.io.Serializable;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CurrentTeam {
+public class CurrentTeam implements Serializable{
     private String acronym;
 
     private int id;
@@ -67,6 +71,7 @@ public class CurrentTeam {
     public void setAcronym(String acronym){
         this.acronym = acronym;
     }
+    
     public CurrentTeam getCurrent_videoGame() {
         return this;
     }
@@ -81,7 +86,7 @@ public class CurrentTeam {
         this.slug = slug;
     }
 
-    static CurrentTeam parseCurrentTeam(JSONObject teamObject) throws JSONException {
+    public static CurrentTeam parseCurrentTeam(JSONObject teamObject) throws JSONException {
         return new CurrentTeam(
                 teamObject.optString("acronym"),
                 teamObject.optInt("id"),

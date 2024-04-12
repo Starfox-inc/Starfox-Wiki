@@ -1,16 +1,41 @@
 plugins {
-    id("java")
+	java
+	id("org.springframework.boot") version "3.2.4"
+	id("io.spring.dependency-management") version "1.1.4"
 }
 
-group = "org.example"
-version = "1.0-SNAPSHOT"
+group = "com.Starfox"
+version = "0.0.1-SNAPSHOT"
 
+java {
+	sourceCompatibility = JavaVersion.VERSION_17
+}
+
+configurations {
+	compileOnly {
+		extendsFrom(configurations.annotationProcessor.get())
+	}
+}
+ 
 repositories {
-    mavenCentral()
+	mavenCentral()
 }
 
 dependencies {
+	//springboot
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	testImplementation("org.springframework.boot:spring-boot-starter-test")
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+	implementation("org.springframework.data:spring-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
 
+	//displaying html website
+	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
+
+	//annotations for models and controllers
+	implementation("org.projectlombok:lombok:1.18.30")
+	annotationProcessor("org.projectlombok:lombok:1.18.30")
+	implementation("org.modelmapper:modelmapper:2.3.5")
 
     //sqlite
     runtimeOnly("mysql:mysql-connector-java:8.0.33")
@@ -24,6 +49,6 @@ dependencies {
 
 }
 
-tasks.test {
-    useJUnitPlatform()
+tasks.withType<Test> {
+	useJUnitPlatform()
 }

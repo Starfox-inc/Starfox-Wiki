@@ -1,8 +1,12 @@
+package com.Starfox.EsportsWiki.database;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
+
+import com.Starfox.EsportsWiki.model.Team;
 
 public class teamToSQL {
     public static void insertDataIntoDB(List<Team> teams, String gameName) throws SQLException {

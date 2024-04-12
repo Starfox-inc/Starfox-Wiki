@@ -1,10 +1,15 @@
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
+package com.Starfox.EsportsWiki.database;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.Starfox.EsportsWiki.model.CurrentTeam;
+import com.Starfox.EsportsWiki.model.CurrentVideoGame;
+import com.Starfox.EsportsWiki.model.Player;
 public class JSONParserPlayer {
     public static List<Player> parseJSON(JSONArray jsonArray) {
         List<Player> playerList = new ArrayList<>();
