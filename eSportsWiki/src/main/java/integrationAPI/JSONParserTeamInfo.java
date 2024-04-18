@@ -1,3 +1,5 @@
+package integrationAPI;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,9 +27,9 @@ public class JSONParserTeamInfo {
 
 //                // Parse players for the team
 //                JSONArray playersArray = teamObject.optJSONArray("players");
-//                List<Player> players = JSONParserPlayer.parseJSON(playersArray);
+//                List<integrationAPI.Player> players = integrationAPI.JSONParserPlayer.parseJSON(playersArray);
 
-                // Create Team object and add to list
+                // Create integrationAPI.Team object and add to list
                 Team team = new Team(acronym, currentVideoGame, id, image_url, location, name, slug);
                 teamList.add(team);
             }

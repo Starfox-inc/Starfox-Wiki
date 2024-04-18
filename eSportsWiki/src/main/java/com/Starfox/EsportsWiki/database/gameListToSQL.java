@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.Starfox.EsportsWiki.model.CurrentVideoGame;
+import integrationAPI.CurrentVideoGame;
 
 public class gameListToSQL {
     private static String url = "jdbc:mysql://localhost:3306/starfox";

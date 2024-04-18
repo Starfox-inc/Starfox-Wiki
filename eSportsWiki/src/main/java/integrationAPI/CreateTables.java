@@ -1,3 +1,5 @@
+package integrationAPI;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -6,9 +8,9 @@ import java.util.List;
 
 public class CreateTables {
     //TO BE CHANGED BY USER
-    private static final String URL = "jdbc:mysql://localhost:3306/yourDatabaseName";
-    private static final String USER = "yourUsername";
-    private static final String PASSWORD = "yourPassword";
+    private static final String URL = "jdbc:mysql://localhost:3306/starfox";
+    private static final String USER = "starfoxUser";
+    private static final String PASSWORD = "$tarfox123";
 
     public static void createTable(String tableName, List<String> columns) {
 //        USE CASE :

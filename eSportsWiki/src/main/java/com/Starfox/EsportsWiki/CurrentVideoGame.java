@@ -1,3 +1,5 @@
+package com.Starfox.EsportsWiki;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 

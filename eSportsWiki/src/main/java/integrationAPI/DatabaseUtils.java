@@ -1,3 +1,5 @@
+package integrationAPI;
+
 import java.sql.*;
 
 public class DatabaseUtils {
@@ -7,12 +9,8 @@ public class DatabaseUtils {
 
     public static void displayTable(String tableName) {
         try (Connection conn = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
-            // Define the SQL query to retrieve data
             String sqlQuery = "SELECT * FROM " + tableName;
-
-            // Create a statement
             try (Statement statement = conn.createStatement()) {
-                // Execute the query
                 try (ResultSet resultSet = statement.executeQuery(sqlQuery)) {
                     ResultSetMetaData metaData = resultSet.getMetaData();
                     int columnCount = metaData.getColumnCount();
@@ -22,50 +20,41 @@ public class DatabaseUtils {
                     // Calculate the maximum width of each column
                     for (int i = 1; i <= columnCount; i++) {
                         String columnName = metaData.getColumnName(i);
-                        columnWidths[i - 1] = Math.max(columnName.length(), 20); // Adjust the minimum width as needed
+                        columnWidths[i - 1] = Math.max(columnName.length(), 20); // Adjust minimum width as needed
                         totalWidth += columnWidths[i - 1];
                     }
 
-                    // Calculate the total width of the column names and spaces
-                    int totalSpaces = (columnCount - 1) * 2; // Number of spaces between column names
+                    // Calculate total width of the column names and spaces
+                    int totalSpaces = (columnCount - 1) * 2;
                     totalWidth += totalSpaces;
 
                     // Display column headers
                     for (int i = 1; i <= columnCount; i++) {
-                        String columnName = metaData.getColumnName(i);
-                        System.out.printf("%-" + columnWidths[i - 1] + "s", columnName);
-                        if (i < columnCount) {
-                            // Add spaces between column names
-                            for (int j = 0; j < 2; j++) {
-                                System.out.print(" ");
-                            }
-                        }
+                        System.out.printf("%-" + columnWidths[i - 1] + "s  ", metaData.getColumnName(i));
                     }
                     System.out.println();
 
                     // Display data rows
                     while (resultSet.next()) {
                         for (int i = 1; i <= columnCount; i++) {
-                            // Special handling for URL column
-                            if (metaData.getColumnName(i).equalsIgnoreCase("image_url")) {
-                                String url = resultSet.getString(i);
-                                if (url != null) {
-                                    if (url.length() > 20) { // Adjust the length as needed
-                                        url = url.substring(0, 17) + "..."; // Truncate URL
+                            String value = resultSet.getString(i);
+                            if (value != null) {
+                                // Special handling for the "slug" column to truncate
+                                if (metaData.getColumnName(i).equalsIgnoreCase("slug")) {
+                                    if (value.length() > 12) {
+                                        value = value.substring(0, 10) + "...";
                                     }
-                                    System.out.printf("%-" + columnWidths[i - 1] + "s", url);
-                                } else {
-                                    System.out.printf("%-" + columnWidths[i - 1] + "s", "N/A"); // Placeholder for null URLs
+                                }
+                                // Special handling for the "image_url" column to truncate
+                                if (metaData.getColumnName(i).equalsIgnoreCase("image_url")) {
+                                    if (value.length() > 20) {
+                                        value = value.substring(0, 17) + "...";
+                                    }
                                 }
                             } else {
-                                System.out.printf("%-" + columnWidths[i - 1] + "s", resultSet.getString(i));
+                                value = "N/A"; // Placeholder for null values
                             }
-                            if (i < columnCount) {
-                                // Add spaces between column values
-                                for (int j = 0; j < 2; j++) {
-                                    System.out.print(" ");
-                                }
-                            }
+                            System.out.printf("%-" + columnWidths[i - 1] + "s  ", value);
                         }
                         System.out.println();
                     }

@@ -29,17 +29,17 @@ public class PlayerService{
 
 
     // public List<PlayerDto> findAll(){
-    //     List<Player> playerList = playerRepository.findAll();
+    //     List<integrationAPI.Player> playerList = playerRepository.findAll();
             
     //     return playerList.stream()
-    //         .map(Player -> modelMapper.map(Player, PlayerDto.class))
+    //         .map(integrationAPI.Player -> modelMapper.map(integrationAPI.Player, PlayerDto.class))
     //         .collect(Collectors.toList());
               
     // }
  
 // /* 
 //     public PlayerDto getPlayerDtoById(Long id){
-//         Player playerEntity = playerRepository.findFirstById(id);
+//         integrationAPI.Player playerEntity = playerRepository.findFirstById(id);
 //         return PlayerDto.builder()
 //         .id(playerEntity.getId())
 //         .teamName(playerEntity.getTeamName())
@@ -51,8 +51,8 @@ public class PlayerService{
 
 //    public PlayerDto getPlayerDtoById(Integer id){
 //     /* 
-//     Optional<Player> playe = playerRepository.findAll();
-//     Player player = playe.get();
+//     Optional<integrationAPI.Player> playe = playerRepository.findAll();
+//     integrationAPI.Player player = playe.get();
 //     */
 //     PlayerDto playerDto = modelMapper.map(playerRepository.find(id), PlayerDto.class);
 

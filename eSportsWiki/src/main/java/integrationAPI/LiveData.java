@@ -1,2 +1,4 @@
-package integrationAPI;public class liveData {
+package integrationAPI;
+
+public class LiveData {
 }
