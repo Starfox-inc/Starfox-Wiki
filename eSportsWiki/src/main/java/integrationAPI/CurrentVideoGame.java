@@ -1,4 +1,4 @@
-package com.Starfox.EsportsWiki.model;
+package integrationAPI;
 
 import java.io.Serializable;
 
@@ -39,7 +39,6 @@ public class CurrentVideoGame implements Serializable{
     public void setId(Integer id) {
         this.id = id;
     }
-/*  
     // Getters
     public Integer getId() {
         return id;
@@ -69,7 +68,7 @@ public class CurrentVideoGame implements Serializable{
     public CurrentVideoGame getCurrent_videoGame() {
         return this;
     }
-*/
+
 
     public static CurrentVideoGame parseCurrentGame(JSONObject gameObject) throws JSONException {
         return new CurrentVideoGame(
@@ -78,4 +77,5 @@ public class CurrentVideoGame implements Serializable{
                 gameObject.getString("slug")
         );
     }
+
 }

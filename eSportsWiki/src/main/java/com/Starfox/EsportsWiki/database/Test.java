@@ -10,7 +10,7 @@ import java.util.List;
 
 import org.json.JSONArray;
 
-import com.Starfox.EsportsWiki.model.CurrentVideoGame;
+import integrationAPI.CurrentVideoGame;
 import com.Starfox.EsportsWiki.model.Player;
 import com.Starfox.EsportsWiki.model.Team;
 public class Test {
@@ -111,7 +111,7 @@ public class Test {
 //
         teamToSQL.insertDataIntoDB(teaminfo, "valteams");
 //
-//        // Player list
+//        // integrationAPI.Player list
         JSONArray playerArray = fetchDataFromAPI("https://api.pandascore.co/players");
 //
         List<Player> playerList = JSONParserPlayer.parseJSON(playerArray);

@@ -1,11 +1,8 @@
-package com.Starfox.EsportsWiki.model;
-
-import integrationAPI.CurrentVideoGame;
+package integrationAPI;
 
 import java.util.List;
 
-
-public class Team{
+public class Team {
     private String acronym;
     private CurrentVideoGame current_videogame;
     private int id;
