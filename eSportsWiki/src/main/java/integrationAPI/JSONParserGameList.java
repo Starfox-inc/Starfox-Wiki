@@ -1,13 +1,11 @@
-package com.Starfox.EsportsWiki.database;
-
-import java.util.ArrayList;
-import java.util.List;
+package integrationAPI;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import integrationAPI.CurrentVideoGame;
+import java.util.ArrayList;
+import java.util.List;
 
 public class JSONParserGameList {
     public static List<CurrentVideoGame> parseJSON(JSONArray jsonArray){

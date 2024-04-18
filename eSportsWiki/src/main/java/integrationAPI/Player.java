@@ -1,69 +1,22 @@
-package com.Starfox.EsportsWiki.model;
+package integrationAPI;
 
-
-
-import integrationAPI.CurrentVideoGame;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.Data;
-
-
-@Data
-@Entity
-@Table(name = "playerlist")
 public class Player {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int playerId;
-    @Column(name = "active")
     private boolean active;
-    @Column(name = "age")
     private Integer age; // Change to Integer to handle null values
-    @Column(name = "first_name")
+
     private String first_name;
-    @Column(name = "image_url")
+    private int playerId;
     private String image_url;
-    @Column(name = "last_name")
     private String last_name;
-    @Column(name = "name")
     private String name;
-    @Column(name = "nationality")
     private String nationality;
-    @Column(name = "role")
     private String role;
-    @Column(name = "slug")
     private String slug;
-    @Column(name = "teaminfo_teamID")
+
     private CurrentTeam teaminfo;
 
-    @Column(name = "current_videogame_gameID")
     private CurrentVideoGame currentGame;
 
-    public Player(){
-        
-    }    
-    public Player(boolean active, Integer age, String first_name, int id, String image_url, String last_name, String name, String nationality, String role, String slug, CurrentTeam teaminfo, CurrentVideoGame currentGame) {
-        this.active = active;
-        this.age = age;
-        this.first_name = first_name;
-        this.playerId = id;
-        this.image_url = image_url;
-        this.last_name = last_name;
-        this.name = name;
-        this.nationality = nationality;
-        this.role = role;
-        this.slug = slug;
-        this.teaminfo = teaminfo;
-        this.currentGame = currentGame;
-    }
-
-
-    /*
     public boolean isActive() {
         return active;
     }
@@ -144,11 +97,11 @@ public class Player {
         this.slug = slug;
     }
 
-    public integrationAPI.CurrentTeam getTeamInfo() {
+    public CurrentTeam getTeamInfo() {
         return teaminfo;
     }
 
-    public void setTeamInfo(integrationAPI.CurrentTeam teamInfo) {
+    public void setTeamInfo(CurrentTeam teamInfo) {
         this.teaminfo = teamInfo;
     }
 
@@ -160,16 +113,27 @@ public class Player {
         this.currentGame = currentGame;
     }
 
-    public integrationAPI.CurrentTeam getTeaminfo() {
+    public CurrentTeam getTeaminfo() {
         return teaminfo;
     }
 
-    public void setTeaminfo(integrationAPI.CurrentTeam teaminfo) {
+    public void setTeaminfo(CurrentTeam teaminfo) {
         this.teaminfo = teaminfo;
     }
- */
 
-    
-    
+    public Player(boolean active, Integer age, String first_name, int id, String image_url, String last_name, String name, String nationality, String role, String slug, CurrentTeam teaminfo, CurrentVideoGame currentGame) {
+        this.active = active;
+        this.age = age;
+        this.first_name = first_name;
+        this.playerId = id;
+        this.image_url = image_url;
+        this.last_name = last_name;
+        this.name = name;
+        this.nationality = nationality;
+        this.role = role;
+        this.slug = slug;
+        this.teaminfo = teaminfo;
+        this.currentGame = currentGame;
+    }
 
 }
