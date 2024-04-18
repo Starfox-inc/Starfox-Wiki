@@ -8,7 +8,7 @@ import com.Starfox.EsportsWiki.model.Player;
 @Repository
 public interface PlayerRepository extends JpaRepository<Player, Integer> {
 
-    // Player findFirstById(Long id);
+    Player findFirstByPlayerId(int id);
  
     // @Query("select p from Player p where p.playerId = ?1")
     // Player find(Long id);

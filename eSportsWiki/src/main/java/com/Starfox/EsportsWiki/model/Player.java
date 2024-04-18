@@ -2,11 +2,15 @@ package com.Starfox.EsportsWiki.model;
 
 
 
+import java.io.Serializable;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -14,10 +18,11 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "playerlist")
-public class Player {
+public class Player implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "playerId")
     private int playerId;
     @Column(name = "active")
     private boolean active;
@@ -37,10 +42,12 @@ public class Player {
     private String role;
     @Column(name = "slug")
     private String slug;
-    @Column(name = "teaminfo_teamID")
+    @ManyToOne
+    @JoinColumn(name = "teaminfo_teamID", nullable = true)
     private CurrentTeam teaminfo;
 
-    @Column(name = "current_videogame_gameID")
+    @ManyToOne
+    @JoinColumn(name = "current_videogame_gameID")
     private CurrentVideoGame currentGame;
 
     public Player(){

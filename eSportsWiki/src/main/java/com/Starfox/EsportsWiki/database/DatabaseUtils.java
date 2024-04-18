@@ -82,8 +82,12 @@ public class DatabaseUtils {
             e.printStackTrace();
         }
     }
+
+
+
+    public static void main(String[] args) {
+        displayTable("csteams"); // Replace "playerList" with the desired table name
+        displayTable("codteams");
+    }
 }
 
-//    public static void main(String[] args) {
-//        displayTable("playerList"); // Replace "playerList" with the desired table name
-//    }

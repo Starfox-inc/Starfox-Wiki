@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeLeaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    Your player is:
+    <table>
+        <tr>
+            <th>name</th>
+            <th>game</th>
+            <th>teamid</th>
+        </tr>
+        <tr th:each = "message : ${playerList}">
+            <td th:text="${message.name}"> name </td>
+            <td th:text="${message.currentGame}"> currentGame </td>
+            <td th:text="${message.teamId}"> teamId </td>
+        </tr>
+    </table>
+    {% comment %} <p th:text = "${playerDto.name}"/> {% endcomment %}
+</body>
+</html>
