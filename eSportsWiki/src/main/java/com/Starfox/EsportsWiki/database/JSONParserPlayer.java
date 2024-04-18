@@ -8,7 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.Starfox.EsportsWiki.model.CurrentTeam;
-import integrationAPI.CurrentVideoGame;
+import com.Starfox.EsportsWiki.model.CurrentVideoGame;
 import com.Starfox.EsportsWiki.model.Player;
 public class JSONParserPlayer {
     public static List<Player> parseJSON(JSONArray jsonArray) {

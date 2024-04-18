@@ -1,7 +1,5 @@
 package com.Starfox.EsportsWiki.model;
 
-import integrationAPI.CurrentVideoGame;
-
 import java.util.List;
 
 

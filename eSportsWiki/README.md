@@ -1,2 +1,2 @@
 "# Starfox-Wiki" 
-integrationAPI.Test
+Test

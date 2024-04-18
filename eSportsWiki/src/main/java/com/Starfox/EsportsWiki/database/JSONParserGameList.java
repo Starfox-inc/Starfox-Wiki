@@ -7,7 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import integrationAPI.CurrentVideoGame;
+import com.Starfox.EsportsWiki.model.CurrentVideoGame;
 
 public class JSONParserGameList {
     public static List<CurrentVideoGame> parseJSON(JSONArray jsonArray){
