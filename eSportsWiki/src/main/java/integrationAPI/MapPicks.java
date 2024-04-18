@@ -1,2 +1,4 @@
-package integrationAPI;public class MapPicks {
+package integrationAPI;
+
+public class MapPicks {
 }

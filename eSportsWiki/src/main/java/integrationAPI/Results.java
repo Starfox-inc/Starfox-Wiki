@@ -1,2 +1,4 @@
-package integrationAPI;public class Results {
+package integrationAPI;
+
+public class Results {
 }

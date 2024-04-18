@@ -1,4 +1,4 @@
-package com.Starfox.EsportsWiki.model;
+package integrationAPI;
 
 import java.io.Serializable;
 

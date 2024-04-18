@@ -1,2 +1,4 @@
-package integrationAPI;public class Opponents {
+package integrationAPI;
+
+public class Opponents {
 }

@@ -2,6 +2,7 @@ package com.Starfox.EsportsWiki.model;
 
 
 
+import integrationAPI.CurrentVideoGame;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -143,11 +144,11 @@ public class Player {
         this.slug = slug;
     }
 
-    public CurrentTeam getTeamInfo() {
+    public integrationAPI.CurrentTeam getTeamInfo() {
         return teaminfo;
     }
 
-    public void setTeamInfo(CurrentTeam teamInfo) {
+    public void setTeamInfo(integrationAPI.CurrentTeam teamInfo) {
         this.teaminfo = teamInfo;
     }
 
@@ -159,11 +160,11 @@ public class Player {
         this.currentGame = currentGame;
     }
 
-    public CurrentTeam getTeaminfo() {
+    public integrationAPI.CurrentTeam getTeaminfo() {
         return teaminfo;
     }
 
-    public void setTeaminfo(CurrentTeam teaminfo) {
+    public void setTeaminfo(integrationAPI.CurrentTeam teaminfo) {
         this.teaminfo = teaminfo;
     }
  */
