@@ -38,10 +38,13 @@ dependencies {
 	implementation("org.modelmapper:modelmapper:2.3.5")
 
     //sqlite
-    runtimeOnly("mysql:mysql-connector-java:8.0.33")
+	runtimeOnly("mysql:mysql-connector-java:8.0.33")
+
 
     //mysql
-    implementation("mysql:mysql-connector-java:8.0.33")
+
+	
+	implementation("mysql:mysql-connector-java:8.0.33")
     implementation("org.json:json:20231013")
 
     //gson

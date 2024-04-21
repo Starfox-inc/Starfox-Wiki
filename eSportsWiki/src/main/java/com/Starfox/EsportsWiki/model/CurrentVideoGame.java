@@ -1,11 +1,28 @@
-package com.Starfox.EsportsWiki;
+package com.Starfox.EsportsWiki.model;
+
+import java.io.Serializable;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class CurrentVideoGame {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Data
+@Entity
+@Table(name = "current_videogame")
+public class CurrentVideoGame implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "slug")
     private String slug;
 
     // Constructor
@@ -22,7 +39,6 @@ public class CurrentVideoGame {
     public void setId(Integer id) {
         this.id = id;
     }
-
     // Getters
     public Integer getId() {
         return id;
@@ -37,9 +53,6 @@ public class CurrentVideoGame {
     }
 
     // Setters
-    public void setId(int id) {
-        this.id = id;
-    }
     public void setId() {
         this.id = null;
     }
@@ -56,11 +69,13 @@ public class CurrentVideoGame {
         return this;
     }
 
-    static CurrentVideoGame parseCurrentGame(JSONObject gameObject) throws JSONException {
+
+    public static CurrentVideoGame parseCurrentGame(JSONObject gameObject) throws JSONException {
         return new CurrentVideoGame(
                 gameObject.getInt("id"),
                 gameObject.getString("name"),
                 gameObject.getString("slug")
         );
     }
+
 }

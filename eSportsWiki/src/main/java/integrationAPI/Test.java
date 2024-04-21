@@ -1,14 +1,14 @@
 package integrationAPI;
 
-import org.json.JSONArray;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.List;
+
+import org.json.JSONArray;
 
 public class Test {
     //please name your database starfox and create a new user with the username and password to maintain consistency across code
@@ -32,9 +32,9 @@ public class Test {
 
 //         // CREATE COLUMN LISTS FOR EACH TABLE
 //        List<String> current_videogameColumns= List.of("id INT AUTO_INCREMENT PRIMARY KEY",
-                                                //        "name VARCHAR(255)",
-                                                //        "slug VARCHAR(255)"
-                                                //        );
+//                                                        "name VARCHAR(255)",
+//                                                        "slug VARCHAR(255)"
+//                                                        );
 
 //        List<String> playerListColumns = List.of(
 //                "playerId INT NOT NULL PRIMARY KEY",
@@ -69,7 +69,7 @@ public class Test {
                 "draw BOOLEAN",
                 "end_at TIMESTAMP",
                 "forfeit BOOLEAN",
-                "games VARCHAR(255)", // Assuming games will be stored as a JSON string
+                "games VARCHAR(3000)", // Assuming games will be stored as a JSON string
                 "id INT PRIMARY KEY",
                 "league VARCHAR(255)", // Assuming league will be stored as a JSON string
                 "league_id INT",
@@ -79,73 +79,73 @@ public class Test {
                 "number_of_games INT",
                 "serie VARCHAR(255)", // Assuming serie will be stored as a JSON string
                 "serie_id INT",
-                "streams_list VARCHAR(255)", // Assuming streamList will be stored as a JSON string
+                "streams_list VARCHAR(2000)", // Assuming streamList will be stored as a JSON string
                 "tournament VARCHAR(255)", // Assuming tournament will be stored as a JSON string
                 "tournament_id INT",
                 "videogame VARCHAR(255)", // Assuming videogame will be stored as a JSON string
                 "game_advantage INT"
         );
 
-//         // CREATE TABLES USING TABLE DEFINITIONS FROM ABOVE
+        // CREATE TABLES USING TABLE DEFINITIONS FROM ABOVE
 //        integrationAPI.CreateTables.createTable("playerlist", playerListColumns);
 //        integrationAPI.CreateTables.createTable("current_videogame", current_videogameColumns);
-//        integrationAPI.CreateTables.createTable("teaminfo", teaminfoColumns);
-//        integrationAPI.CreateTables.createTable("codteams", teaminfoColumns);
-//        integrationAPI.CreateTables.createTable("csteams", teaminfoColumns);
-//        integrationAPI.CreateTables.createTable("lolteams", teaminfoColumns);
-//        integrationAPI.CreateTables.createTable("valteams", teaminfoColumns);
+//        integrationAPI.CreateTables.createTable("teaminfo", teamInfoColumns);
+//        integrationAPI.CreateTables.createTable("codteams", teamInfoColumns);
+//        integrationAPI.CreateTables.createTable("csteams", teamInfoColumns);
+//        integrationAPI.CreateTables.createTable("lolteams", teamInfoColumns);
+//        integrationAPI.CreateTables.createTable("valteams", teamInfoColumns);
         integrationAPI.CreateTables.createTable("runningMatchList", runningMatchesColumns);
 
 //        Filling tables - starting with teaminfo table
 //        Call to fetchDataFromAPI to get the JSONArray
 //        JSONArray jsonArray = fetchDataFromAPI("https://api.pandascore.co/teams");
-//
-//
+
+
 //        // Parse JSON data
 //        List<integrationAPI.Team> teaminfo = integrationAPI.JSONParserTeamInfo.parseJSON(jsonArray);
-//
+
 //        // Use the parsed data as needed
 //        integrationAPI.teamToSQL.insertDataIntoDB(teaminfo, "teaminfo");
 //        // COD TEAMS
-//
+
 //        jsonArray = fetchDataFromAPI("https://api.pandascore.co/codmw/teams");
-//
+
 //        teaminfo = integrationAPI.JSONParserTeamInfo.parseJSON(jsonArray);
-//
+
 //        integrationAPI.teamToSQL.insertDataIntoDB(teaminfo, "codteams");
 //        // CS TEAMS
 //        jsonArray = fetchDataFromAPI("https://api.pandascore.co/csgo/teams");
-////
+// //
 //        teaminfo = integrationAPI.JSONParserTeamInfo.parseJSON(jsonArray);
-////
+// //
 //        integrationAPI.teamToSQL.insertDataIntoDB(teaminfo, "csteams");
 //        // LOL TEAMS
 //        jsonArray = fetchDataFromAPI("https://api.pandascore.co/lol/teams");
-//
+
 //        teaminfo = integrationAPI.JSONParserTeamInfo.parseJSON(jsonArray);
-//
+
 //        integrationAPI.teamToSQL.insertDataIntoDB(teaminfo, "lolteams");
 //        // VAL TEAMS
 //        jsonArray = fetchDataFromAPI("https://api.pandascore.co/valorant/teams");
-//
+
 //        teaminfo = integrationAPI.JSONParserTeamInfo.parseJSON(jsonArray);
-//
+
 //        integrationAPI.teamToSQL.insertDataIntoDB(teaminfo, "valteams");
-//
+
 //        // integrationAPI.Player list
 //        JSONArray playerArray = fetchDataFromAPI("https://api.pandascore.co/players");
-//
+
 //        List<integrationAPI.Player> playerList = integrationAPI.JSONParserPlayer.parseJSON(playerArray);
-//
+
 //        integrationAPI.playerToSQL.insertDataIntoDB(playerList, "playerlist");
-//
+
 //        // game list
 //        JSONArray gameListArray = fetchDataFromAPI("https://api.pandascore.co/videogames");
-//
+
 //        List<CurrentVideoGame> gameList = integrationAPI.JSONParserGameList.parseJSON(gameListArray);
+
+//        integrationAPI.gameListToSQL.insertDataIntoDB(gameList);
 //
-//        integrationAPI.gameListToSQL.insertDataIntoDB(gameList, "current_videogame");
-////
         JSONArray runningMatches = fetchDataFromAPI("https://api.pandascore.co/matches/running");
 
         List<Match> runningMatchList = Match.parseMatch(runningMatches);
@@ -180,7 +180,7 @@ public class Test {
 //        System.out.println("\n\n\n");
 
 
-        integrationAPI.DatabaseUtils.displayTable("runningMatchList");
+        //integrationAPI.DatabaseUtils.displayTable("runningMatchList");
 
     }
 

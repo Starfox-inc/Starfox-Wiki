@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -30,27 +29,11 @@ public class PlayerController{
     }
 
     @GetMapping("/{id}")
-    public String getPlayerById(@PathVariable("id") int id, Model model){
-        PlayerDto playerDto = playerService.getPlayerDtoById(id);
-        model.addAttribute("playerDto", playerDto);
-        return "home";
-
+    @ResponseBody
+    public PlayerDto getPlayerById(@PathVariable("id") int id){
+        return playerService.getPlayerDtoById(id);
+        
     }
 
-    // @GetMapping("/{id}")
-    // @ResponseBody
-    // public ResponseEntity<PlayerDto> getPlayerById(@PathVariable("id") int id){
-    //     PlayerDto playerDto = playerService.getPlayerDtoById(id);
-
-    //     return ResponseEntity.ok(playerDto);
-    // }
-    
-    // @GetMapping(value="/hey/{hello}" )
-    // public String welcome(@PathVariable("hello") Integer id, Model model){
-    //     PlayerDto playerDto = playerService.getPlayerDtoById(id);
-    //     model.addAttribute("playerDto", playerDto);
-
-         
-    //     return "index";
-    // }
+  
 }

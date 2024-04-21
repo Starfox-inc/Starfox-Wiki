@@ -1,19 +1,17 @@
 package integrationAPI;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
-import java.util.List;
+import lombok.Data;
 
-public class StreamsList implements Serializable {
+@Data
+public class StreamsList implements Serializable{
     private String embed_url;
     private String language;
     private boolean main;

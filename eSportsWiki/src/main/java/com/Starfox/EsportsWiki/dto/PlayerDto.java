@@ -17,10 +17,6 @@ public class PlayerDto{
     boolean active;
     String currentGame;
 
-    @Override
-    public String toString(){
-        return playerId + " " + name + " " + teamId + " " + active + " " + currentGame;
-    }
 }
 
 

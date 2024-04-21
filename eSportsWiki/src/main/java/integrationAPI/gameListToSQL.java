@@ -12,7 +12,7 @@ public class gameListToSQL {
     private static String password = "$tarfox123";
 
     public static void insertDataIntoDB(List<CurrentVideoGame> videoGames) {
-        String sql = "INSERT INTO current_videogame (gameID, name, slug) VALUES (?, ?, ?)";
+        String sql = "INSERT INTO current_videogame (id, name, slug) VALUES (?, ?, ?)";
 
         try (Connection conn = DriverManager.getConnection(url, user, password);
              PreparedStatement insertStmt = conn.prepareStatement(sql)) {

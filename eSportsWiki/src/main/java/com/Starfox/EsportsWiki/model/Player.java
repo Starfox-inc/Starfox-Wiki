@@ -1,9 +1,7 @@
 package com.Starfox.EsportsWiki.model;
-
-
-
 import java.io.Serializable;
 
+//import integrationAPI.CurrentVideoGame;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,16 +42,17 @@ public class Player implements Serializable{
     private String slug;
     @ManyToOne
     @JoinColumn(name = "teaminfo_teamID", nullable = true)
-    private CurrentTeam teaminfo;
+    private TeamInfo teaminfo;
 
     @ManyToOne
     @JoinColumn(name = "current_videogame_gameID")
-    private CurrentVideoGame currentGame;
+    private com.Starfox.EsportsWiki.model.CurrentVideoGame currentGame;
 
     public Player(){
         
     }    
-    public Player(boolean active, Integer age, String first_name, int id, String image_url, String last_name, String name, String nationality, String role, String slug, CurrentTeam teaminfo, CurrentVideoGame currentGame) {
+    
+    public Player(boolean active, Integer age, String first_name, int id, String image_url, String last_name, String name, String nationality, String role, String slug, TeamInfo teaminfo, CurrentVideoGame currentGame) {
         this.active = active;
         this.age = age;
         this.first_name = first_name;

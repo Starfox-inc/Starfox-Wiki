@@ -1,8 +1,8 @@
 package integrationAPI;
 
-import com.google.gson.Gson;
-
 import java.util.List;
+
+import com.google.gson.Gson;
 
 public class Serializer {
 
@@ -17,4 +17,6 @@ public class Serializer {
         Gson gson = new Gson();
         return gson.toJson(list);
     }
+
+
 }

@@ -1,13 +1,13 @@
 package integrationAPI;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-class Game implements Serializable {
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class Game implements Serializable {
     private String begin_at;
     private boolean complete;
     private String end_at;

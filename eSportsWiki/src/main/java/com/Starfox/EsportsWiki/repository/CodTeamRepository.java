@@ -1,14 +1,13 @@
 package com.Starfox.EsportsWiki.repository;
 
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.Starfox.EsportsWiki.model.Player;
+import com.Starfox.EsportsWiki.model.CodTeams;
 
 @Repository
-public interface PlayerRepository extends JpaRepository<Player, Integer> {
+public interface CodTeamRepository extends JpaRepository<CodTeams,Integer>{
 
-    Player findFirstByPlayerId(int id);
- 
- 
+    CodTeams findFirstById(int id);
 }
