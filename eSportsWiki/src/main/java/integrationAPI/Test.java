@@ -63,6 +63,13 @@ public class Test {
 //                "slug VARCHAR(255)"
 //        );
 
+/*        List<String> userColumns = List.of(
+                "user_id INT AUTO_INCREMENT PRIMARY KEY",
+                "username VARCHAR(30) NOT NULL UNIQUE",
+                "email VARCHAR(255) NOT NULL UNIQUE",
+                "password_hash VARCHAR(60) NOT NULL"
+        );      
+*/
         List<String> runningMatchesColumns = List.of(
                 "begin_at TIMESTAMP",
                 "detailed_stats BOOLEAN",
@@ -95,7 +102,7 @@ public class Test {
 //        integrationAPI.CreateTables.createTable("lolteams", teamInfoColumns);
 //        integrationAPI.CreateTables.createTable("valteams", teamInfoColumns);
         integrationAPI.CreateTables.createTable("runningMatchList", runningMatchesColumns);
-
+//        CreateTables.createTable("users", userColumns);
 //        Filling tables - starting with teaminfo table
 //        Call to fetchDataFromAPI to get the JSONArray
 //        JSONArray jsonArray = fetchDataFromAPI("https://api.pandascore.co/teams");

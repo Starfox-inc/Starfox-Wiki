@@ -50,6 +50,13 @@ dependencies {
     //gson
     implementation("com.google.code.gson:gson:2.9.1")
 
+	//jbcrypt for password hashing
+    implementation ("org.mindrot:jbcrypt:0.4")
+
+	//validation	
+	implementation ("org.springframework.boot:spring-boot-starter-validation")
+
+
 }
 
 tasks.withType<Test> {
