@@ -56,6 +56,9 @@ dependencies {
 	//validation	
 	implementation ("org.springframework.boot:spring-boot-starter-validation")
 
+	//thymeleaf
+	implementation ("org.springframework.boot:spring-boot-starter-thymeleaf")
+
 
 }
 

@@ -1,0 +1,108 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #292929;
+}
+
+.navbar {
+    display: flex;
+    justify-content: left;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    background-color: #333;
+    width: fit-content;
+    height: 100%;
+    position: fixed;
+  }
+  
+  .navbar li {
+    float: top;
+    border-bottom: #ff5a5a 1px solid;
+  }
+  
+  .navbar li a {
+    width: 100%;
+    display: block;
+    color: white;
+    text-align: left;
+    padding: 15px;
+    text-decoration: none;
+  }
+  
+  .navbar li a:hover {
+    background-color: #111;
+  }
+
+.navbar li:last-child {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    border-bottom: none;
+    border-top: #ff5a5a 1px solid;
+}
+
+.navbar li a.active {
+    background-color: #ff5a5a;
+}
+
+.gamebar {
+    display: flex;
+    justify-content: center;
+    padding: 10px 10px;
+}
+
+.gamebar li {
+    display: inline;
+    margin-right: 10px;
+    padding-right: 10px;
+    align-items: center;
+}
+
+.gamebar li:last-child {
+    border-right: none;
+}
+
+.container {
+    border: #000000 2px solid;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+.form-group button {
+    width: 100%;
+    padding: 10px;
+    background-color: #ff5a5a;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.gameselected img{
+    border-bottom: #ff5a5a 1px solid;
+}
