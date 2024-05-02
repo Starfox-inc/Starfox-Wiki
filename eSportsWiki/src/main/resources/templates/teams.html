@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" type="text/css" href="standards.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -25,5 +25,29 @@
         </ul>
     </nav>
     <script src="navbar.js" type="text/javascript"></script>
+
+
+
+
+
+  <!--Used for when client calls a single team by id-->
+  <p th:text="${currentTeamDto}"/>  
+
+
+
+  <!-- Used for a list of current teams-->
+  <table>
+    <tbody th:each="currentTeamDto : ${currentTeamDtoList}">
+        <tr>
+            <td th:text="${currentTeamDto}"></td>
+            <!-- Can be used instead of line above for calling attributes of a single team 
+            <td th:text="${currentTeamDto.id}"></td>
+            <td th:text="${currentTeamDto.name}"></td> {% endcomment %} -->
+        </tr>
+    </tbody>
+  </table>
+
+
+
 </body>
 </html>

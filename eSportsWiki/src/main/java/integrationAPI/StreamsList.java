@@ -49,5 +49,9 @@ public class StreamsList implements Serializable{
         }
         return streamsList;
     }
+
+    public String toString(){
+        return "raw_url: " + raw_url;
+    }
 }
 

@@ -112,6 +112,9 @@ public class Game implements Serializable {
         this.winner = winner;
     }
 
+    public String toString(){
+        return "Game id: " + id + " Began at: "+ begin_at + " Status: " + status;
+    }
     private Winner winner;
 
     public Game(String begin_at, boolean complete, String end_at, boolean finished,

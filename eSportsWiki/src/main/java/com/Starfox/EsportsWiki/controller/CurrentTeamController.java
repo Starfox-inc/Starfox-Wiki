@@ -1,12 +1,10 @@
 package com.Starfox.EsportsWiki.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.Starfox.EsportsWiki.dto.CurrentTeamDto;
 import com.Starfox.EsportsWiki.service.CurrentTeamService;
@@ -22,62 +20,63 @@ public class CurrentTeamController {
     }
 
     @GetMapping("/teaminfo")
-    @ResponseBody
-    public List<CurrentTeamDto> findAllTeams(){
-        return currentTeamService.findAllTeams();
+    public String findAllTeams(Model model){
+        model.addAttribute("currentTeamDtoList", currentTeamService.findAllTeams()) ;
+        return "teams";
     }
 
     @GetMapping("/teaminfo/{id}")
-    @ResponseBody
-    public CurrentTeamDto getTeamById(@PathVariable("id") int id){
-        return currentTeamService.getTeamById(id);    
+    public String getTeamById(@PathVariable("id") int id, Model model){
+        CurrentTeamDto currentTeamDto = currentTeamService.getTeamById(id);
+        model.addAttribute("currentTeamDto", currentTeamDto);
+        return "teams";    
     }
 
     @GetMapping("/valteams")
-    @ResponseBody
-    public List<CurrentTeamDto> findAllValTeams(){
-        return currentTeamService.findAllValTeams();
+    public String findAllValTeams(Model model){
+        model.addAttribute("currentTeamDtoList", currentTeamService.findAllValTeams());
+        return "teams";
     }
 
     @GetMapping("/valteams/{id}")
-    @ResponseBody
-    public CurrentTeamDto getValTeamById(@PathVariable("id") int id){
-        return currentTeamService.getValTeamById(id);    
+    public String getValTeamById(@PathVariable("id") int id, Model model){
+        model.addAttribute("currentTeamDto", currentTeamService.getValTeamById(id));    
+        return "teams";
     }
 
     @GetMapping("/codteams")
-    @ResponseBody
-    public List<CurrentTeamDto> findAllCodTeams(){
-        return currentTeamService.findAllCodTeams();
+    public String findAllCodTeams(Model model){
+        model.addAttribute("currentTeamDtoList", currentTeamService.findAllCodTeams());
+        return "teams";
     }
 
     @GetMapping("/codteams/{id}")
-    @ResponseBody
-    public CurrentTeamDto getCodTeamById(@PathVariable("id") int id){
-        return currentTeamService.getCodTeamById(id);    
+    public String getCodTeamById(@PathVariable("id") int id, Model model){
+        model.addAttribute("currentTeamDto", currentTeamService.getCodTeamById(id));
+        return "teams";    
     }
 
     @GetMapping("/csteams")
-    @ResponseBody
-    public List<CurrentTeamDto> findAllCsTeams(){
-        return currentTeamService.findAllCsTeams();
+    public String findAllCsTeams(Model model){
+        model.addAttribute("currentTeamDtoList", currentTeamService.findAllCsTeams());
+        return "teams";
     }
     
     @GetMapping("/csteams/{id}")
-    @ResponseBody
-    public CurrentTeamDto getCsTeamById(@PathVariable("id") int id){
-        return currentTeamService.getCsTeamById(id);    
+    public String getCsTeamById(@PathVariable("id") int id, Model model){
+        model.addAttribute("currentTeamDto", currentTeamService.getCsTeamById(id));
+        return "teams";    
     }
 
     @GetMapping("/lolteams")
-    @ResponseBody
-    public List<CurrentTeamDto> findAllLoLTeams(){
-        return currentTeamService.findAllLoLTeams();
+    public String findAllLoLTeams(Model model){
+        model.addAttribute("currentTeamDtoList", currentTeamService.findAllLoLTeams());
+        return "teams";
     }
     
     @GetMapping("/lolteams/{id}")
-    @ResponseBody
-    public CurrentTeamDto getLoLTeamById(@PathVariable("id") int id){
-        return currentTeamService.getLoLTeamById(id);    
+    public String getLoLTeamById(@PathVariable("id") int id, Model model){
+        model.addAttribute("currentTeamDto", currentTeamService.getLoLTeamById(id));
+        return "teams";    
     }
 }
