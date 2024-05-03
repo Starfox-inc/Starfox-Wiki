@@ -108,6 +108,10 @@ public class Test {
 //        integrationAPI.CreateTables.createTable("csMatches", matchesColumns);
 //        integrationAPI.CreateTables.createTable("valMatches", matchesColumns);
 //        integrationAPI.CreateTables.createTable("lolMatches", matchesColumns);
+//        integrationAPI.CreateTables.createTable("codPastMatches", matchesColumns);
+//        integrationAPI.CreateTables.createTable("lolPastMatches", matchesColumns);
+//        integrationAPI.CreateTables.createTable("valPastMatches", matchesColumns);
+//        integrationAPI.CreateTables.createTable("csPastMatches", matchesColumns);
 
 //        Filling tables - starting with teaminfo table
 //        Call to fetchDataFromAPI to get the JSONArray
@@ -164,19 +168,19 @@ public class Test {
 //        List<Match> runningMatchList = Match.parseMatch(runningMatches);
 //
 //        matchToSQL.insertDataIntoDB(runningMatchList, "runningMatchList");
-
+//
 //        JSONArray codMatches = fetchDataFromAPI("https://api.pandascore.co/codmw/matches");
 //
 //        List<Match> codMatchList = Match.parseMatch(codMatches);
 //
 //        matchToSQL.insertDataIntoDB(codMatchList, "codMatches");
-
+//
 //        JSONArray csMatches = fetchDataFromAPI("https://api.pandascore.co/csgo/matches");
 //
 //        List<Match> csMatchList = Match.parseMatch(csMatches);
 //
 //        matchToSQL.insertDataIntoDB(csMatchList, "csMatches");
-
+//
 //        JSONArray valMatches = fetchDataFromAPI("https://api.pandascore.co/valorant/matches");
 //
 //        List<Match> valMatchList = Match.parseMatch(valMatches);
@@ -188,6 +192,30 @@ public class Test {
 //        List<Match> lolMatchList = Match.parseMatch(lolMatches);
 //
 //        matchToSQL.insertDataIntoDB(lolMatchList, "lolMatches");
+
+//        JSONArray codPastMatches = fetchDataFromAPI("https://api.pandascore.co/codmw/matches/past");
+//
+//        List<Match> codPastMatchList = Match.parseMatch(codPastMatches);
+//
+//        matchToSQL.insertDataIntoDB(codPastMatchList, "codPastMatches");
+//
+//        JSONArray csPastMatches = fetchDataFromAPI("https://api.pandascore.co/csgo/matches/past");
+//
+//        List<Match> csPastMatchList = Match.parseMatch(csPastMatches);
+//
+//        matchToSQL.insertDataIntoDB(csPastMatchList, "csPastMatches");
+//
+//        JSONArray valPastMatches = fetchDataFromAPI("https://api.pandascore.co/valorant/matches/past");
+//
+//        List<Match> valPastMatchList = Match.parseMatch(valPastMatches);
+//
+//        matchToSQL.insertDataIntoDB(valPastMatchList, "valPastMatches");
+//
+//        JSONArray lolPastMatches = fetchDataFromAPI("https://api.pandascore.co/lol/matches/past");
+//
+//        List<Match> lolPastMatchList = Match.parseMatch(lolPastMatches);
+//
+//        matchToSQL.insertDataIntoDB(lolPastMatchList, "lolPastMatches");
 
         // // TESTING DATABASE TABLE CONTENTS
 ////
@@ -217,7 +245,7 @@ public class Test {
 //        System.out.println("\n\n\n");
 
 
-        integrationAPI.DatabaseUtils.displayTable("codMatches");
+        integrationAPI.DatabaseUtils.displayTable("codPastMatches");
         //integrationAPI.DatabaseUtils.displayTable("runningMatchList");
 
     }
