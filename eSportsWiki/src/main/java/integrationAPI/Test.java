@@ -4,6 +4,7 @@ import org.json.JSONArray;
 
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
@@ -18,7 +19,7 @@ public class Test {
     private static final String USERNAME = "starfoxUser";
     private static final String PASSWORD = "$tarfox123";
     private static final String bearerToken = "UzzOazUKLU9n3-7TaaT6SRtiU7lPjDVJ-B1rx76kO8hzvam17o8";
-    public static void main(String[] args) throws IOException, InterruptedException, SQLException {
+    public static void main(String[] args) throws IOException, InterruptedException, SQLException, URISyntaxException {
 
 //        NOT TO BE COMMENTED OUT -> USE THIS IN MYSQL TO GIVE KEY CONSTRAINTS FOR TABLES
 //        ALTER TABLE playerlist
@@ -38,20 +39,20 @@ public class Test {
                                                 //        "slug VARCHAR(255)"
                                                 //        );
 
-//        List<String> playerListColumns = List.of(
-//                "playerId INT NOT NULL PRIMARY KEY",
-//                "active TINYINT(1)",
-//                "age INT",
-//                "first_name VARCHAR(255)",
-//                "last_name VARCHAR(255)",
-//                "name VARCHAR(255)",
-//                "nationality VARCHAR(255)",
-//                "role VARCHAR(255)",
-//                "slug VARCHAR(255)",
-//                "image_url VARCHAR(255)",
-//                "teaminfo_teamID INT",
-//                "current_videogame_gameID INT"
-//        );
+        List<String> playerListColumns = List.of(
+                "playerId INT NOT NULL PRIMARY KEY",
+                "active TINYINT(1)",
+                "age INT",
+                "first_name VARCHAR(255)",
+                "last_name VARCHAR(255)",
+                "name VARCHAR(255)",
+                "nationality VARCHAR(255)",
+                "role VARCHAR(255)",
+                "slug VARCHAR(255)",
+                "image_url VARCHAR(255)",
+                "teaminfo_teamID INT",
+                "current_videogame_gameID INT"
+        );
 
 //        List<String> teamInfoColumns = List.of(
 //                "teamID INT NOT NULL PRIMARY KEY",
@@ -96,7 +97,7 @@ public class Test {
 
 
 //         // CREATE TABLES USING TABLE DEFINITIONS FROM ABOVE
-//        integrationAPI.CreateTables.createTable("playerlist", playerListColumns);
+        integrationAPI.CreateTables.createTable("playerlist", playerListColumns);
 //        integrationAPI.CreateTables.createTable("current_videogame", current_videogameColumns);
 //        integrationAPI.CreateTables.createTable("teaminfo", teaminfoColumns);
 //        integrationAPI.CreateTables.createTable("codteams", teaminfoColumns);
@@ -123,6 +124,7 @@ public class Test {
 //
 //        // Use the parsed data as needed
 //        integrationAPI.teamToSQL.insertDataIntoDB(teaminfo, "teaminfo");
+
 //        // COD TEAMS
 //
 //        jsonArray = fetchDataFromAPI("https://api.pandascore.co/codmw/teams");
@@ -150,11 +152,11 @@ public class Test {
 //        integrationAPI.teamToSQL.insertDataIntoDB(teaminfo, "valteams");
 //
 //        // integrationAPI.Player list
-//        JSONArray playerArray = fetchDataFromAPI("https://api.pandascore.co/players");
-//
-//        List<integrationAPI.Player> playerList = integrationAPI.JSONParserPlayer.parseJSON(playerArray);
-//
-//        integrationAPI.playerToSQL.insertDataIntoDB(playerList, "playerlist");
+        JSONArray playerArray = fetchDataFromAPI("https://api.pandascore.co/players");
+
+        List<integrationAPI.Player> playerList = integrationAPI.JSONParserPlayer.parseJSON(playerArray);
+
+        integrationAPI.playerToSQL.insertDataIntoDB(playerList, "playerlist");
 //
 //        // game list
 //        JSONArray gameListArray = fetchDataFromAPI("https://api.pandascore.co/videogames");
@@ -245,34 +247,51 @@ public class Test {
 //        System.out.println("\n\n\n");
 
 
-        integrationAPI.DatabaseUtils.displayTable("codPastMatches");
+        integrationAPI.DatabaseUtils.displayTable("playerlist");
         //integrationAPI.DatabaseUtils.displayTable("runningMatchList");
 
     }
 
     // Define fetchDataFromAPI method to fetch data from the API and return a JSONArray
-    static JSONArray fetchDataFromAPI(String url) throws IOException, InterruptedException {
-        // Create URL object
-        URI uri = URI.create(url);
+    static final int MAX_PAGES = 10; // Maximum number of pages to fetch
 
+    static JSONArray fetchDataFromAPI(String url) throws IOException, InterruptedException, URISyntaxException {
+        JSONArray allData = new JSONArray();
+        int pageNumber = 1;
+        int pageSize = 50; // Default page size
+        boolean hasMorePages = true;
 
         // Create HTTP client
         HttpClient client = HttpClient.newHttpClient();
 
-        // Create HTTP request
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(uri)
-                .header("Authorization", "Bearer " + Test.bearerToken)
-                .build();
+        while (pageNumber <= MAX_PAGES && hasMorePages) {
+            // Create URI with page number
+            URI uri = new URI(url + "?page[number]=" + pageNumber + "&page[size]=" + pageSize);
 
-        // Send HTTP request and handle response
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        if (response.statusCode() == 200) {
-            // Parse response as JSON array and return
-            return new JSONArray(response.body());
-        } else {
-            throw new IOException("Failed to fetch data from API. Response code: " + response.statusCode());
+            // Create HTTP request
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(uri)
+                    .header("Authorization", "Bearer " + Test.bearerToken)
+                    .build();
+
+            // Send HTTP request and handle response
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                // Parse response as JSON array and add to allData
+                JSONArray responseData = new JSONArray(response.body());
+                allData.putAll(responseData);
+
+                // Check if there are more pages
+                if (responseData.length() < pageSize) {
+                    hasMorePages = false;
+                } else {
+                    pageNumber++;
+                }
+            } else {
+                throw new IOException("Failed to fetch data from API. Response code: " + response.statusCode());
+            }
         }
 
+        return allData;
     }
 }

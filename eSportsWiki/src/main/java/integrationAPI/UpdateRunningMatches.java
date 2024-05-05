@@ -1,6 +1,7 @@
 package integrationAPI;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -13,7 +14,7 @@ public class UpdateRunningMatches {
     private static final String URL = "jdbc:mysql://localhost:3306/starfox";
     private static final String USER = "starfoxUser";
     private static final String PASSWORD = "$tarfox123";
-    public static void main(String [] args) throws IOException, InterruptedException{
+    public static void main(String [] args) throws IOException, InterruptedException, URISyntaxException {
         dropRunningMatchTable();
         List<String> runningMatchesColumns = List.of(
             "begin_at TIMESTAMP",

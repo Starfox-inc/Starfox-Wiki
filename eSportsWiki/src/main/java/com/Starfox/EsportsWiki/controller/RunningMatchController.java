@@ -1,6 +1,7 @@
 package com.Starfox.EsportsWiki.controller;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ public class RunningMatchController {
     }
 
     @GetMapping()
-    public String findAll(Model model) throws IOException, InterruptedException{
+    public String findAll(Model model) throws IOException, InterruptedException, URISyntaxException {
         UpdateRunningMatches.main(null);
         System.out.println("Running Matches fetched");
         model.addAttribute("runningMatchDtoList", runningMatchService.findAll());
@@ -33,7 +34,7 @@ public class RunningMatchController {
     }
 
     @GetMapping("/{id}")
-    public String getRunningMatchById(@PathVariable("id") int id, Model model) throws IOException, InterruptedException {
+    public String getRunningMatchById(@PathVariable("id") int id, Model model) throws IOException, InterruptedException, URISyntaxException {
         UpdateRunningMatches.main(null);
         model.addAttribute("runningMatchDto", runningMatchService.getRunningMatchDtoById(id));
         return "matches";
