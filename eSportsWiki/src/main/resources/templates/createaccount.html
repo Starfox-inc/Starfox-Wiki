@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="standards.css">
+    <link rel="stylesheet" type="text/css" href="/css/standards.css">
     <title>Create Account</title>
     <style>
         #createaccount {
@@ -16,7 +16,7 @@
 <body>
     <nav class="navbar">
         <ul>
-            <li><a href="matches.html"><img src="Assets/logo.png" alt="Logo" width="200px" height="100px"/></a></li>
+            <li><a href="matches.html"><img src="/images/logo.png" alt="Logo" width="200px" height="100px"/></a></li>
             <li><a href="matches.html">Match History</a></li>
             <li><a href="#">Teams</a></li>
             <li><a href="#">Schedule</a></li>
@@ -25,17 +25,17 @@
     </nav>
     <nav class="gamebar">
         <ul>
-            <li id="League_of_Legends"><img src="Assets/lol.png" alt="League_of_Legends" width="100" height="50"></li>
-            <li id="CSGO"><img src="Assets/csgo.png" alt="CSGO" width="100" height="50"></li>
-            <li id="Valorant"><img src="Assets/valorant.png" alt="Valorant" width="100" height="50"></li>
-            <li id="Call_of_Duty"><img src="Assets/cod.png" alt="Call_of_Duty" width="100" height="50"></li>
+            <li id="League_of_Legends"><img src="/images/lol.png" alt="League_of_Legends" width="100" height="50"></li>
+            <li id="CSGO"><img src="/images/csgo.png" alt="CSGO" width="100" height="50"></li>
+            <li id="Valorant"><img src="/images/valorant.png" alt="Valorant" width="100" height="50"></li>
+            <li id="Call_of_Duty"><img src="/images/cod.png" alt="Call_of_Duty" width="100" height="50"></li>
         </ul>
     </nav>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="navbar.js" type="text/javascript"></script>
     
     <div class="container">
-        <form>
+        <form action="/users/register" method="post">
             <label for="username">Username:</label>
             <input type="text" id="username" name="username" required><br><br>
             
@@ -43,28 +43,29 @@
             <input type="email" id="email" name="email" required><br><br>
             
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required><br><br>
+            <input type="password" id="password" name="password" pattern=".{8,}" title="Password must be at least 8 characters" required><br><br>
 
             <label for="password">Re-enter password:</label>
-            <input type="password" id="password" name="password" required><br><br>
+            <input type="password" id="confirmPassword" name="confirmPassword" required><br><br>
             
             <input type="submit" value="Create Account">
         </form>
     </div>
     <script>
         document.querySelector("form").addEventListener("submit", function(event) {
-            event.preventDefault();
+            //event.preventDefault();
             let user = document.getElementById("username").value;
             let email = document.getElementById("email").value;
             let pass = document.getElementById("password").value;
-            let confirmPass = document.getElementById("password").value;
+            let confirmPass = document.getElementById("confirmPassword").value;
             if (pass != confirmPass) {
+                event.preventDefault();
                 alert("Passwords do not match.");
             } else {
                 // Add to database here
-                alert("Account created successfully.");
-                localStorage.setItem("username", user);
-                window.location.href = "settings.html";
+                //alert("Account created successfully.");
+                //localStorage.setItem("username", user);
+                //window.location.href = "settings.html";
             }
         });
     </script>

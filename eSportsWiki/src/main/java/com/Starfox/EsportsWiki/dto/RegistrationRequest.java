@@ -1,23 +1,23 @@
 package com.Starfox.EsportsWiki.dto;
-/*
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
-*/
+
 public class RegistrationRequest {
     
-    //@NotEmpty(message = "Username cannot be empty")
+    @NotEmpty(message = "Username cannot be empty")
     private String username;
 
-    //@NotEmpty(message = "Email cannot be empty")
-    //@Email(message = "Email should be valid")
+    @NotEmpty(message = "Email cannot be empty")
+    @Email(message = "Email should be valid")
     private String email;
 
-    //@NotEmpty(message = "Password cannot be empty")
-    //@Size(min = 8, message = "Password must be at least 8 characters long")
+    @NotEmpty(message = "Password cannot be empty")
+    @Size(min = 8, message = "Password must be at least 8 characters long")
     private String password;
     
-    // Constructors
+    //Constructors
     public RegistrationRequest() {}
 
     public RegistrationRequest(String username, String email, String password) {
@@ -26,7 +26,6 @@ public class RegistrationRequest {
         this.password = password;
     }
 
-    // Getters and setters
     public String getUsername() {
         return username;
     }

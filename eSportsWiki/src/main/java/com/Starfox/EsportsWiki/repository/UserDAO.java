@@ -4,8 +4,13 @@ import com.Starfox.EsportsWiki.model.User;
 import java.sql.*;
 import org.springframework.stereotype.Repository;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 @Repository
 public class UserDAO {
+
+    private static final Logger logger = LoggerFactory.getLogger(UserDAO.class);
 
     private static final String JDBC_URL = "jdbc:mysql://localhost:3306/starfox";
     private static final String DB_USERNAME = "starfoxUser";
@@ -21,7 +26,8 @@ public class UserDAO {
             pstmt.setString(1, user.getUsername());
             pstmt.setString(2, user.getEmail());
             pstmt.setString(3, user.getPasswordHash());
-
+            
+            logger.info("Executing SQL: {}", sql);
             int affectedRows = pstmt.executeUpdate();
 
             if (affectedRows > 0) {
@@ -29,12 +35,16 @@ public class UserDAO {
                 try (ResultSet generatedKeys = pstmt.getGeneratedKeys()) {
                     if (generatedKeys.next()) {
                         user.setUserId(generatedKeys.getInt(1));
+                        logger.info("User added with ID: {}", user.getUserId());
                         return true;
                     }
                 }
+            }else{
+                logger.warn("No rows affected, user not added");
+                return affectedRows > 0;
             }
         } catch (SQLException e) {
-            
+            logger.error("Error adding user: ", e);
             e.printStackTrace();
         }
 

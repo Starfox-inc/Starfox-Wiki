@@ -6,6 +6,8 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Service
 public class AuthenticationService {
@@ -22,11 +24,17 @@ public class AuthenticationService {
         return BCrypt.hashpw(plainTextPassword, BCrypt.gensalt());
     }
 
+    private static final Logger log = LoggerFactory.getLogger(AuthenticationService.class);
+
     //Register a new user
     public boolean registerUser(String username, String email, String plainTextPassword) {
+        /*if (!plainTextPassword.equals(confirmPassword)) {
+            return false; // Passwords do not match
+        }*/
+        log.debug("Attempting to register user: {}", username);
         //check if the username or email already exists
         if (userDao.getUserByUsername(username) != null) {
-            //Handle the case where a user already exists with the given username
+            //Handles the case where a user already exists with the username
             return false;
         }
 

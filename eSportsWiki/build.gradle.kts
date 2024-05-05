@@ -55,6 +55,7 @@ dependencies {
 
 	//validation	
 	implementation ("org.springframework.boot:spring-boot-starter-validation")
+	implementation ("javax.validation:validation-api:2.0.1.Final")
 
 	//thymeleaf
 	implementation ("org.springframework.boot:spring-boot-starter-thymeleaf")

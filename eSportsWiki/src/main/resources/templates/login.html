@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Login Page</title>
-    <link rel="stylesheet" type="text/css" href="standards.css">
+    <link rel="stylesheet" type="text/css" href="/css/standards.css">
     <style>
         #createaccount {
             display: block;
@@ -16,7 +16,7 @@
 <body>
     <nav class="navbar">
         <ul>
-            <li><a href="matches.html"><img src="Assets/logo.png" alt="Logo" width="200px" height="100px"/></a></li>
+            <li><a href="matches.html"><img src="/images/logo.png" alt="Logo" width="200px" height="100px"/></a></li>
             <li><a href="matches.html">Match History</a></li>
             <li><a href="#">Teams</a></li>
             <li><a href="#">Schedule</a></li>
@@ -25,10 +25,10 @@
     </nav>
     <nav class="gamebar">
         <ul>
-            <li id="League_of_Legends"><img src="Assets/lol.png" alt="League_of_Legends" width="100" height="50"></li>
-            <li id="CSGO"><img src="Assets/csgo.png" alt="CSGO" width="100" height="50"></li>
-            <li id="Valorant"><img src="Assets/valorant.png" alt="Valorant" width="100" height="50"></li>
-            <li id="Call_of_Duty"><img src="Assets/cod.png" alt="Call_of_Duty" width="100" height="50"></li>
+            <li id="League_of_Legends"><img src="/images/lol.png" alt="League_of_Legends" width="100" height="50"></li>
+            <li id="CSGO"><img src="/images/csgo.png" alt="CSGO" width="100" height="50"></li>
+            <li id="Valorant"><img src="/images/valorant.png" alt="Valorant" width="100" height="50"></li>
+            <li id="Call_of_Duty"><img src="/images/cod.png" alt="Call_of_Duty" width="100" height="50"></li>
         </ul>
     </nav>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -64,7 +64,7 @@
 
             // Redirect to settings and save username if login is successful
             localStorage.setItem("username", user);
-            window.location.href = "settings.html";
+            window.location.href = "/users/settings.html";
         });
     </script>
 </body>
