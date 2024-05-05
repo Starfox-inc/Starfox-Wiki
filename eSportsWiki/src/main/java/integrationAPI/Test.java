@@ -1,13 +1,11 @@
 package integrationAPI;
 
-import org.json.JSONArray;
-
 import java.io.IOException;
 import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -104,14 +102,14 @@ public class Test {
 //        integrationAPI.CreateTables.createTable("lolteams", teaminfoColumns);
 //        integrationAPI.CreateTables.createTable("valteams", teaminfoColumns);
 //        integrationAPI.CreateTables.createTable("runningMatchList", matchesColumns);
-//        integrationAPI.CreateTables.createTable("codMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("csMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("valMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("lolMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("codPastMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("lolPastMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("valPastMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("csPastMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("codMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("csMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("valMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("lolMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("codPastMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("lolPastMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("valPastMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("csPastMatches", matchesColumns);
 
 //        Filling tables - starting with teaminfo table
 //        Call to fetchDataFromAPI to get the JSONArray
@@ -169,53 +167,53 @@ public class Test {
 //
 //        matchToSQL.insertDataIntoDB(runningMatchList, "runningMatchList");
 //
-//        JSONArray codMatches = fetchDataFromAPI("https://api.pandascore.co/codmw/matches");
-//
-//        List<Match> codMatchList = Match.parseMatch(codMatches);
-//
-//        matchToSQL.insertDataIntoDB(codMatchList, "codMatches");
-//
-//        JSONArray csMatches = fetchDataFromAPI("https://api.pandascore.co/csgo/matches");
-//
-//        List<Match> csMatchList = Match.parseMatch(csMatches);
-//
-//        matchToSQL.insertDataIntoDB(csMatchList, "csMatches");
-//
-//        JSONArray valMatches = fetchDataFromAPI("https://api.pandascore.co/valorant/matches");
-//
-//        List<Match> valMatchList = Match.parseMatch(valMatches);
-//
-//        matchToSQL.insertDataIntoDB(valMatchList, "valMatches");
-//
-//        JSONArray lolMatches = fetchDataFromAPI("https://api.pandascore.co/lol/matches");
-//
-//        List<Match> lolMatchList = Match.parseMatch(lolMatches);
-//
-//        matchToSQL.insertDataIntoDB(lolMatchList, "lolMatches");
+       JSONArray codMatches = fetchDataFromAPI("https://api.pandascore.co/codmw/matches");
 
-//        JSONArray codPastMatches = fetchDataFromAPI("https://api.pandascore.co/codmw/matches/past");
-//
-//        List<Match> codPastMatchList = Match.parseMatch(codPastMatches);
-//
-//        matchToSQL.insertDataIntoDB(codPastMatchList, "codPastMatches");
-//
-//        JSONArray csPastMatches = fetchDataFromAPI("https://api.pandascore.co/csgo/matches/past");
-//
-//        List<Match> csPastMatchList = Match.parseMatch(csPastMatches);
-//
-//        matchToSQL.insertDataIntoDB(csPastMatchList, "csPastMatches");
-//
-//        JSONArray valPastMatches = fetchDataFromAPI("https://api.pandascore.co/valorant/matches/past");
-//
-//        List<Match> valPastMatchList = Match.parseMatch(valPastMatches);
-//
-//        matchToSQL.insertDataIntoDB(valPastMatchList, "valPastMatches");
-//
-//        JSONArray lolPastMatches = fetchDataFromAPI("https://api.pandascore.co/lol/matches/past");
-//
-//        List<Match> lolPastMatchList = Match.parseMatch(lolPastMatches);
-//
-//        matchToSQL.insertDataIntoDB(lolPastMatchList, "lolPastMatches");
+       List<Match> codMatchList = Match.parseMatch(codMatches);
+
+       matchToSQL.insertDataIntoDB(codMatchList, "codMatches");
+
+       JSONArray csMatches = fetchDataFromAPI("https://api.pandascore.co/csgo/matches");
+
+       List<Match> csMatchList = Match.parseMatch(csMatches);
+
+       matchToSQL.insertDataIntoDB(csMatchList, "csMatches");
+
+       JSONArray valMatches = fetchDataFromAPI("https://api.pandascore.co/valorant/matches");
+
+       List<Match> valMatchList = Match.parseMatch(valMatches);
+
+       matchToSQL.insertDataIntoDB(valMatchList, "valMatches");
+
+       JSONArray lolMatches = fetchDataFromAPI("https://api.pandascore.co/lol/matches");
+
+       List<Match> lolMatchList = Match.parseMatch(lolMatches);
+
+       matchToSQL.insertDataIntoDB(lolMatchList, "lolMatches");
+
+       JSONArray codPastMatches = fetchDataFromAPI("https://api.pandascore.co/codmw/matches/past");
+
+       List<Match> codPastMatchList = Match.parseMatch(codPastMatches);
+
+       matchToSQL.insertDataIntoDB(codPastMatchList, "codPastMatches");
+
+       JSONArray csPastMatches = fetchDataFromAPI("https://api.pandascore.co/csgo/matches/past");
+
+       List<Match> csPastMatchList = Match.parseMatch(csPastMatches);
+
+       matchToSQL.insertDataIntoDB(csPastMatchList, "csPastMatches");
+
+       JSONArray valPastMatches = fetchDataFromAPI("https://api.pandascore.co/valorant/matches/past");
+
+       List<Match> valPastMatchList = Match.parseMatch(valPastMatches);
+
+       matchToSQL.insertDataIntoDB(valPastMatchList, "valPastMatches");
+
+       JSONArray lolPastMatches = fetchDataFromAPI("https://api.pandascore.co/lol/matches/past");
+
+       List<Match> lolPastMatchList = Match.parseMatch(lolPastMatches);
+
+       matchToSQL.insertDataIntoDB(lolPastMatchList, "lolPastMatches");
 
         // // TESTING DATABASE TABLE CONTENTS
 ////

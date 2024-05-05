@@ -9,12 +9,24 @@ import java.util.List;
 
 import org.json.JSONArray;
 
-public class UpdateRunningMatches {
+public class UpdateDatabase {
     private static final String URL = "jdbc:mysql://localhost:3306/starfox";
     private static final String USER = "starfoxUser";
     private static final String PASSWORD = "$tarfox123";
     public static void main(String [] args) throws IOException, InterruptedException{
-        dropRunningMatchTable();
+    }
+
+
+
+    public static void updateTable(String tablename, String APIurl) throws IOException, InterruptedException {
+        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
+            Statement stmt = conn.createStatement()) {
+            stmt.execute("DROP TABLE " + tablename);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+
+
         List<String> runningMatchesColumns = List.of(
             "begin_at TIMESTAMP",
             "detailed_stats BOOLEAN",
@@ -38,25 +50,15 @@ public class UpdateRunningMatches {
             "game_advantage INT"
     );
 
-        integrationAPI.CreateTables.createTable("runningMatchList", runningMatchesColumns);
+        integrationAPI.CreateTables.createTable(tablename, runningMatchesColumns);
 
-
-        JSONArray runningMatches = Test.fetchDataFromAPI("https://api.pandascore.co/matches/running");
+        JSONArray runningMatches = Test.fetchDataFromAPI(APIurl);
 
         List<Match> runningMatchList = Match.parseMatch(runningMatches);
 
-        matchToSQL.insertDataIntoDB(runningMatchList, "runningMatchList");
+        matchToSQL.insertDataIntoDB(runningMatchList, tablename);
 
-
-    }
-
-    
-    public static void dropRunningMatchTable() {
-        try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
-            Statement stmt = conn.createStatement()) {
-            stmt.execute("DROP TABLE runningmatchlist");
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        }
+        
+        
     }
 }

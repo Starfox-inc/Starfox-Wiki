@@ -38,14 +38,13 @@
     <!--  This is used for when client requests a list of running matches-->
     <table>
         <tbody th:each="runningMatchDto : ${runningMatchDtoList}">
-            <tr>
-                <td th:text="${runningMatchDto.id}"></td>
-                <td th:text="${runningMatchDto.name}"></td>
+            <tr >
+                <td th:text="${runningMatchDto.id}"/>
+                <td th:text="${runningMatchDto.name}"/>
+                <td th:each= "game: ${runningMatchDto.games}" th:text="${game.id}"/>
             </tr>
         </tbody>
-      </table>
-
-
+    </table>
 
 </body>
 </html>

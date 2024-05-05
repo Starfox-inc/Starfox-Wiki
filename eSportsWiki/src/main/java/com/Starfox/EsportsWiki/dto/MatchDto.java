@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-public class RunningMatchDto {
+public class MatchDto {
  
     Integer id;
     String name;
