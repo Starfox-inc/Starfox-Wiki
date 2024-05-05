@@ -1,6 +1,7 @@
 package integrationAPI;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ public class UpdateDatabase {
 
 
 
-    public static void updateTable(String tablename, String APIurl) throws IOException, InterruptedException {
+    public static void updateTable(String tablename, String APIurl) throws IOException, InterruptedException, URISyntaxException {
         try (Connection conn = DriverManager.getConnection(URL, USER, PASSWORD);
             Statement stmt = conn.createStatement()) {
             stmt.execute("DROP TABLE " + tablename);

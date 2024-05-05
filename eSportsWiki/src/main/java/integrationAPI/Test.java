@@ -161,7 +161,7 @@ public class Test {
 //
 //        List<CurrentVideoGame> gameList = integrationAPI.JSONParserGameList.parseJSON(gameListArray);
 //
-//        integrationAPI.gameListToSQL.insertDataIntoDB(gameList, "current_videogame");
+//        integrationAPI.gameListToSQL.insertDataIntoDB(gameList);
 ////
 //        JSONArray runningMatches = fetchDataFromAPI("https://api.pandascore.co/matches/running");
 //
