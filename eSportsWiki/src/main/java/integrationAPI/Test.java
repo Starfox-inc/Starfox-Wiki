@@ -1,13 +1,12 @@
 package integrationAPI;
 
-import org.json.JSONArray;
-
 import java.io.IOException;
 import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.sql.*;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -18,7 +17,7 @@ public class Test {
     private static final String USERNAME = "starfoxUser";
     private static final String PASSWORD = "$tarfox123";
     private static final String bearerToken = "UzzOazUKLU9n3-7TaaT6SRtiU7lPjDVJ-B1rx76kO8hzvam17o8";
-    public static void main(String[] args) throws IOException, InterruptedException, SQLException {
+    public static void main(String[] args) throws IOException, InterruptedException, SQLException, URISyntaxException {
 
 //        NOT TO BE COMMENTED OUT -> USE THIS IN MYSQL TO GIVE KEY CONSTRAINTS FOR TABLES
 //        ALTER TABLE playerlist
@@ -38,20 +37,20 @@ public class Test {
                                                 //        "slug VARCHAR(255)"
                                                 //        );
 
-//        List<String> playerListColumns = List.of(
-//                "playerId INT NOT NULL PRIMARY KEY",
-//                "active TINYINT(1)",
-//                "age INT",
-//                "first_name VARCHAR(255)",
-//                "last_name VARCHAR(255)",
-//                "name VARCHAR(255)",
-//                "nationality VARCHAR(255)",
-//                "role VARCHAR(255)",
-//                "slug VARCHAR(255)",
-//                "image_url VARCHAR(255)",
-//                "teaminfo_teamID INT",
-//                "current_videogame_gameID INT"
-//        );
+        List<String> playerListColumns = List.of(
+                "playerId INT NOT NULL PRIMARY KEY",
+                "active TINYINT(1)",
+                "age INT",
+                "first_name VARCHAR(255)",
+                "last_name VARCHAR(255)",
+                "name VARCHAR(255)",
+                "nationality VARCHAR(255)",
+                "role VARCHAR(255)",
+                "slug VARCHAR(255)",
+                "image_url VARCHAR(255)",
+                "teaminfo_teamID INT",
+                "current_videogame_gameID INT"
+        );
 
 //        List<String> teamInfoColumns = List.of(
 //                "teamID INT NOT NULL PRIMARY KEY",
@@ -96,7 +95,7 @@ public class Test {
 
 
 //         // CREATE TABLES USING TABLE DEFINITIONS FROM ABOVE
-//        integrationAPI.CreateTables.createTable("playerlist", playerListColumns);
+        integrationAPI.CreateTables.createTable("playerlist", playerListColumns);
 //        integrationAPI.CreateTables.createTable("current_videogame", current_videogameColumns);
 //        integrationAPI.CreateTables.createTable("teaminfo", teaminfoColumns);
 //        integrationAPI.CreateTables.createTable("codteams", teaminfoColumns);
@@ -104,14 +103,14 @@ public class Test {
 //        integrationAPI.CreateTables.createTable("lolteams", teaminfoColumns);
 //        integrationAPI.CreateTables.createTable("valteams", teaminfoColumns);
 //        integrationAPI.CreateTables.createTable("runningMatchList", matchesColumns);
-//        integrationAPI.CreateTables.createTable("codMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("csMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("valMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("lolMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("codPastMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("lolPastMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("valPastMatches", matchesColumns);
-//        integrationAPI.CreateTables.createTable("csPastMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("codMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("csMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("valMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("lolMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("codPastMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("lolPastMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("valPastMatches", matchesColumns);
+       integrationAPI.CreateTables.createTable("csPastMatches", matchesColumns);
 
 //        Filling tables - starting with teaminfo table
 //        Call to fetchDataFromAPI to get the JSONArray
@@ -123,6 +122,7 @@ public class Test {
 //
 //        // Use the parsed data as needed
 //        integrationAPI.teamToSQL.insertDataIntoDB(teaminfo, "teaminfo");
+
 //        // COD TEAMS
 //
 //        jsonArray = fetchDataFromAPI("https://api.pandascore.co/codmw/teams");
@@ -150,18 +150,18 @@ public class Test {
 //        integrationAPI.teamToSQL.insertDataIntoDB(teaminfo, "valteams");
 //
 //        // integrationAPI.Player list
-//        JSONArray playerArray = fetchDataFromAPI("https://api.pandascore.co/players");
-//
-//        List<integrationAPI.Player> playerList = integrationAPI.JSONParserPlayer.parseJSON(playerArray);
-//
-//        integrationAPI.playerToSQL.insertDataIntoDB(playerList, "playerlist");
+        JSONArray playerArray = fetchDataFromAPI("https://api.pandascore.co/players");
+
+        List<integrationAPI.Player> playerList = integrationAPI.JSONParserPlayer.parseJSON(playerArray);
+
+        integrationAPI.playerToSQL.insertDataIntoDB(playerList, "playerlist");
 //
 //        // game list
 //        JSONArray gameListArray = fetchDataFromAPI("https://api.pandascore.co/videogames");
 //
 //        List<CurrentVideoGame> gameList = integrationAPI.JSONParserGameList.parseJSON(gameListArray);
 //
-//        integrationAPI.gameListToSQL.insertDataIntoDB(gameList, "current_videogame");
+//        integrationAPI.gameListToSQL.insertDataIntoDB(gameList);
 ////
 //        JSONArray runningMatches = fetchDataFromAPI("https://api.pandascore.co/matches/running");
 //
@@ -169,53 +169,53 @@ public class Test {
 //
 //        matchToSQL.insertDataIntoDB(runningMatchList, "runningMatchList");
 //
-//        JSONArray codMatches = fetchDataFromAPI("https://api.pandascore.co/codmw/matches");
-//
-//        List<Match> codMatchList = Match.parseMatch(codMatches);
-//
-//        matchToSQL.insertDataIntoDB(codMatchList, "codMatches");
-//
-//        JSONArray csMatches = fetchDataFromAPI("https://api.pandascore.co/csgo/matches");
-//
-//        List<Match> csMatchList = Match.parseMatch(csMatches);
-//
-//        matchToSQL.insertDataIntoDB(csMatchList, "csMatches");
-//
-//        JSONArray valMatches = fetchDataFromAPI("https://api.pandascore.co/valorant/matches");
-//
-//        List<Match> valMatchList = Match.parseMatch(valMatches);
-//
-//        matchToSQL.insertDataIntoDB(valMatchList, "valMatches");
-//
-//        JSONArray lolMatches = fetchDataFromAPI("https://api.pandascore.co/lol/matches");
-//
-//        List<Match> lolMatchList = Match.parseMatch(lolMatches);
-//
-//        matchToSQL.insertDataIntoDB(lolMatchList, "lolMatches");
+       JSONArray codMatches = fetchDataFromAPI("https://api.pandascore.co/codmw/matches");
 
-//        JSONArray codPastMatches = fetchDataFromAPI("https://api.pandascore.co/codmw/matches/past");
-//
-//        List<Match> codPastMatchList = Match.parseMatch(codPastMatches);
-//
-//        matchToSQL.insertDataIntoDB(codPastMatchList, "codPastMatches");
-//
-//        JSONArray csPastMatches = fetchDataFromAPI("https://api.pandascore.co/csgo/matches/past");
-//
-//        List<Match> csPastMatchList = Match.parseMatch(csPastMatches);
-//
-//        matchToSQL.insertDataIntoDB(csPastMatchList, "csPastMatches");
-//
-//        JSONArray valPastMatches = fetchDataFromAPI("https://api.pandascore.co/valorant/matches/past");
-//
-//        List<Match> valPastMatchList = Match.parseMatch(valPastMatches);
-//
-//        matchToSQL.insertDataIntoDB(valPastMatchList, "valPastMatches");
-//
-//        JSONArray lolPastMatches = fetchDataFromAPI("https://api.pandascore.co/lol/matches/past");
-//
-//        List<Match> lolPastMatchList = Match.parseMatch(lolPastMatches);
-//
-//        matchToSQL.insertDataIntoDB(lolPastMatchList, "lolPastMatches");
+       List<Match> codMatchList = Match.parseMatch(codMatches);
+
+       matchToSQL.insertDataIntoDB(codMatchList, "codMatches");
+
+       JSONArray csMatches = fetchDataFromAPI("https://api.pandascore.co/csgo/matches");
+
+       List<Match> csMatchList = Match.parseMatch(csMatches);
+
+       matchToSQL.insertDataIntoDB(csMatchList, "csMatches");
+
+       JSONArray valMatches = fetchDataFromAPI("https://api.pandascore.co/valorant/matches");
+
+       List<Match> valMatchList = Match.parseMatch(valMatches);
+
+       matchToSQL.insertDataIntoDB(valMatchList, "valMatches");
+
+       JSONArray lolMatches = fetchDataFromAPI("https://api.pandascore.co/lol/matches");
+
+       List<Match> lolMatchList = Match.parseMatch(lolMatches);
+
+       matchToSQL.insertDataIntoDB(lolMatchList, "lolMatches");
+
+       JSONArray codPastMatches = fetchDataFromAPI("https://api.pandascore.co/codmw/matches/past");
+
+       List<Match> codPastMatchList = Match.parseMatch(codPastMatches);
+
+       matchToSQL.insertDataIntoDB(codPastMatchList, "codPastMatches");
+
+       JSONArray csPastMatches = fetchDataFromAPI("https://api.pandascore.co/csgo/matches/past");
+
+       List<Match> csPastMatchList = Match.parseMatch(csPastMatches);
+
+       matchToSQL.insertDataIntoDB(csPastMatchList, "csPastMatches");
+
+       JSONArray valPastMatches = fetchDataFromAPI("https://api.pandascore.co/valorant/matches/past");
+
+       List<Match> valPastMatchList = Match.parseMatch(valPastMatches);
+
+       matchToSQL.insertDataIntoDB(valPastMatchList, "valPastMatches");
+
+       JSONArray lolPastMatches = fetchDataFromAPI("https://api.pandascore.co/lol/matches/past");
+
+       List<Match> lolPastMatchList = Match.parseMatch(lolPastMatches);
+
+       matchToSQL.insertDataIntoDB(lolPastMatchList, "lolPastMatches");
 
         // // TESTING DATABASE TABLE CONTENTS
 ////
@@ -245,34 +245,51 @@ public class Test {
 //        System.out.println("\n\n\n");
 
 
-        integrationAPI.DatabaseUtils.displayTable("codPastMatches");
+        integrationAPI.DatabaseUtils.displayTable("playerlist");
         //integrationAPI.DatabaseUtils.displayTable("runningMatchList");
 
     }
 
     // Define fetchDataFromAPI method to fetch data from the API and return a JSONArray
-    static JSONArray fetchDataFromAPI(String url) throws IOException, InterruptedException {
-        // Create URL object
-        URI uri = URI.create(url);
+    static final int MAX_PAGES = 10; // Maximum number of pages to fetch
 
+    static JSONArray fetchDataFromAPI(String url) throws IOException, InterruptedException, URISyntaxException {
+        JSONArray allData = new JSONArray();
+        int pageNumber = 1;
+        int pageSize = 50; // Default page size
+        boolean hasMorePages = true;
 
         // Create HTTP client
         HttpClient client = HttpClient.newHttpClient();
 
-        // Create HTTP request
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(uri)
-                .header("Authorization", "Bearer " + Test.bearerToken)
-                .build();
+        while (pageNumber <= MAX_PAGES && hasMorePages) {
+            // Create URI with page number
+            URI uri = new URI(url + "?page[number]=" + pageNumber + "&page[size]=" + pageSize);
 
-        // Send HTTP request and handle response
-        HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-        if (response.statusCode() == 200) {
-            // Parse response as JSON array and return
-            return new JSONArray(response.body());
-        } else {
-            throw new IOException("Failed to fetch data from API. Response code: " + response.statusCode());
+            // Create HTTP request
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(uri)
+                    .header("Authorization", "Bearer " + Test.bearerToken)
+                    .build();
+
+            // Send HTTP request and handle response
+            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                // Parse response as JSON array and add to allData
+                JSONArray responseData = new JSONArray(response.body());
+                allData.putAll(responseData);
+
+                // Check if there are more pages
+                if (responseData.length() < pageSize) {
+                    hasMorePages = false;
+                } else {
+                    pageNumber++;
+                }
+            } else {
+                throw new IOException("Failed to fetch data from API. Response code: " + response.statusCode());
+            }
         }
 
+        return allData;
     }
 }
