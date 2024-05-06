@@ -66,4 +66,9 @@ public class WebController {
     public String changepass(){
         return "/changepass";
     }
+
+    @GetMapping("/inbox")
+    public String inbox(){
+        return "/inbox";
+    }
 }
