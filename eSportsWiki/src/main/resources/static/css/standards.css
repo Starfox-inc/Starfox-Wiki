@@ -128,3 +128,24 @@ body {
     color: #ff5a5a;
     text-decoration: none;
 }
+
+.home {
+    justify-content: center;
+    width: 75%;
+    height: 75%;
+    margin: 0 auto;
+    background-color: #292929;
+    overflow: hidden;
+}
+
+.box {
+    display: flex;
+    justify-content: center;
+    padding: 10px 10px;
+    border: #000000 2px solid;
+    border-radius: 5px;
+    height: 40%;
+    
+    overflow: hidden;
+
+}
