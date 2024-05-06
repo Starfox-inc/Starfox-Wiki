@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import com.Starfox.EsportsWiki.service.CurrentTeamService;
 import com.Starfox.EsportsWiki.service.MatchService;
@@ -35,10 +34,11 @@ public class WebController {
         return "matches";
     }
 
-    @GetMapping("/live")
-    public String live(){
-        return "live";
-    }
+    //Similar code for this is in the match controller for the running matches.
+    // @GetMapping("/live")
+    // public String live(){
+    //     return "live";
+    // }
 
     @GetMapping("/")
     public String home(Model model) throws IOException, InterruptedException, URISyntaxException{

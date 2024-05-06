@@ -49,7 +49,7 @@ public class MatchController {
         return "matches";
     }
 
-    @GetMapping("/live/{game}")
+    @GetMapping("/live")
     public String findAllRunningMatches(Model model) throws IOException, InterruptedException, URISyntaxException{
         UpdateDatabase.updateTable("runningMatchList", "https://api.pandascore.co/matches/running" );
         System.out.println("Running Matches fetched");
