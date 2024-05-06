@@ -9,7 +9,7 @@
 <body style="background-color: #292929;">  
     <nav class="mynavbar">
         <ul>
-            <li><a href="/"><img th:src="@{/images/sfoxlogo.png}" alt="Logo" width="200px" height="200px"/></a></li>
+            <li><a href="/live"><img th:src="@{/images/sfoxlogo.png}" alt="Logo" width="200px" height="200px"/></a></li>
             <li><a href="/matches">Match History</a></li>
             <li><a href="/teams">Teams</a></li>
             <li><a href="/live">Live</a></li>
@@ -39,7 +39,7 @@
         <tr>
             <td th:text="${currentTeamDto.acronym}"></td>
             <td th:text="${currentTeamDto.name}"></td>
-            <td><a th:href="@{players/(id=${currentTeamDto.id})}">Players</a></td>
+            <td><a class="mylink" th:href="@{/players/{teamid}/{teamname}(teamid=${currentTeamDto.id}, teamname=${currentTeamDto.name})}">Players</a></td>
         </tr>
     </tbody>
 </table>

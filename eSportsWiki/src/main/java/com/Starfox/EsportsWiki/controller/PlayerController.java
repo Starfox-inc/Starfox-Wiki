@@ -12,9 +12,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.Starfox.EsportsWiki.dto.PlayerDto;
 import com.Starfox.EsportsWiki.service.PlayerService;
 
+import com.Starfox.EsportsWiki.dto.CurrentTeamDto;
+import com.Starfox.EsportsWiki.service.CurrentTeamService;
+import org.springframework.ui.Model;
 
 @Controller
-@RequestMapping("/player")
 public class PlayerController{
     
     PlayerService playerService;
@@ -22,10 +24,15 @@ public class PlayerController{
     @Autowired
     public PlayerController(PlayerService playerService) { this.playerService = playerService;}
 
-    @GetMapping()
+    @GetMapping("/players/{teamid}/{teamname}")
     @ResponseBody
-    public List<PlayerDto> findAll(){
-        return playerService.findAll();
+    public String findAll(@PathVariable("teamid") Integer teamid, @PathVariable("teamname") String teamname, Model model){
+        //System.out.println("teamstr: " + team);
+        //int team = Integer.parseInt(teamstr);
+        model.addAttribute("teamidsearch", teamid);
+        model.addAttribute("teamnamesearch", teamname);
+        model.addAttribute("playerDtoList", playerService.findAll());
+        return "/players";
     }
 
     @GetMapping("/{id}")
