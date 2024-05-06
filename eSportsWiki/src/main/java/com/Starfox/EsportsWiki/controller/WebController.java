@@ -24,4 +24,19 @@ public class WebController {
     public String home(){
         return "home";
     }
+
+    @GetMapping("//{game}")
+    public String tohome(){
+        return "home";
+    }
+
+    @GetMapping("/settings")
+    public String settings(){
+        return "settings";
+    }
+
+    @GetMapping("/user/changepass")
+    public String changepass(){
+        return "/changepass";
+    }
 }

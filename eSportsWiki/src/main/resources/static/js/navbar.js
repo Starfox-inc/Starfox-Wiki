@@ -19,5 +19,7 @@ gamebarItems.forEach(item => {
         window.location.href = newLocation;
     });
 });
-if(!this.location.href.includes(game))
+if(!window.location.href.includes(game) && (window.location.href.includes("matches") || window.location.href.includes("teams"))){
     window.location.href = this.location.href + "/" + game;
+}
+    

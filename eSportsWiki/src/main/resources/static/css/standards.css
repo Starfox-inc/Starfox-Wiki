@@ -1,4 +1,9 @@
 
+.mylink {
+    color: #ff5a5a;
+    text-decoration: none;
+}
+
 
 body {
     font-family: Arial, sans-serif;
@@ -108,4 +113,18 @@ body {
 
 .gameselected img{
     border-bottom: #ff5a5a 1px solid;
+}
+
+#passwordlink {
+    color: #ff5a5a;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#createaccount {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #ff5a5a;
+    text-decoration: none;
 }

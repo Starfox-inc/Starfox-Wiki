@@ -13,7 +13,7 @@
             <li><a href="/matches">Match History</a></li>
             <li><a href="/teams">Teams</a></li>
             <li><a href="/live">Live</a></li>
-            <li><a href="/user">Account</a></li>
+            <li><a href="/settings">Account</a></li>
         </ul>
     </nav>
     <nav class="gamebar">
@@ -32,7 +32,7 @@
             <tr>
                 <th scope="col">League</th>
                 <th scope="col">Series</th>
-                <th scope="col"># Games</th>
+                <th scope="col">Type</th>
                 <th scope="col">Watch</th>
             </tr>
         </thead>
@@ -40,8 +40,8 @@
             <tr>
                 <td th:text="${teamMatchDto.leagueName}"></td>
                 <td th:text="${teamMatchDto.name}"></td>
-                <td th:text="${teamMatchDto.numberOfGames}"></td>
-                <td><span th:if="${teamMatchDto.streamList[0] != null}"><a th:href="${teamMatchDto.streamList[0].raw_url}">VOD</a></span></td>
+                <td th:text="|Best of ${teamMatchDto.numberOfGames}|"></td>
+                <td><span th:if="${teamMatchDto.streamList[0] != null}"><a class="mylink" th:href="${teamMatchDto.streamList[0].raw_url}">VOD</a></span></td>
             </tr>
         </tbody>
     </table>
