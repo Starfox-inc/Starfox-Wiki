@@ -25,14 +25,13 @@ public class PlayerController{
     public PlayerController(PlayerService playerService) { this.playerService = playerService;}
 
     @GetMapping("/players/{teamid}/{teamname}")
-    @ResponseBody
-    public String findAll(@PathVariable("teamid") Integer teamid, @PathVariable("teamname") String teamname, Model model){
+    public String findAllPlayers(@PathVariable("teamid") Integer teamid, @PathVariable("teamname") String teamname, Model model){
         //System.out.println("teamstr: " + team);
         //int team = Integer.parseInt(teamstr);
         model.addAttribute("teamidsearch", teamid);
         model.addAttribute("teamnamesearch", teamname);
         model.addAttribute("playerDtoList", playerService.findAll());
-        return "/players";
+        return "players";
     }
 
     @GetMapping("/{id}")
