@@ -14,5 +14,10 @@ gamebarItems.forEach(item => {
         console.log(game);
         localStorage.setItem("game", game);
         $('#' + game).toggleClass('gameselected');
+        let lastSlashIndex = this.location.href.lastIndexOf('/');
+        let newLocation = this.location.href.substring(0, lastSlashIndex) + "/" + game;
+        window.location.href = newLocation;
     });
 });
+if(!this.location.href.includes(game))
+    window.location.href = this.location.href + "/" + game;

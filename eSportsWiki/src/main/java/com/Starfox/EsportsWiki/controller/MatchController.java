@@ -24,6 +24,31 @@ public class MatchController {
         this.matchService = matchService;
     }
 
+    @GetMapping("/matches/{game}")
+    public String matches(@PathVariable("game") String game, Model model)throws IOException, InterruptedException, URISyntaxException{
+        switch (game) {
+            case "lol":
+                model.addAttribute("teamMatchDtoList", matchService.findAllLolPastMatches());
+                System.out.println("LOL Matches fetched");
+                break;
+            case "cs":
+                model.addAttribute("teamMatchDtoList", matchService.findAllCsPastMatches());    
+                System.out.println("CS Matches fetched");
+                break;
+            case "cod":
+                model.addAttribute("teamMatchDtoList", matchService.findAllCodPastMatches());
+                System.out.println("COD Matches fetched");    
+                break;
+            case "val":
+                model.addAttribute("teamMatchDtoList", matchService.findAllValPastMatches());
+                System.out.println("VAL Matches fetched");        
+                break;
+            default:
+                break;
+        }
+        return "matches";
+    }
+
     @GetMapping("/runningmatches")
     public String findAllRunningMatches(Model model) throws IOException, InterruptedException, URISyntaxException{
         UpdateDatabase.updateTable("runningMatchList", "https://api.pandascore.co/matches/running" );

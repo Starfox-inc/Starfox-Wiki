@@ -1,5 +1,8 @@
 package com.Starfox.EsportsWiki.controller;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +16,31 @@ import com.Starfox.EsportsWiki.service.CurrentTeamService;
 public class CurrentTeamController {
     
     CurrentTeamService currentTeamService;
+
+    @GetMapping("/teams/{game}")
+    public String matches(@PathVariable("game") String game, Model model)throws IOException, InterruptedException, URISyntaxException{
+        switch (game) {
+            case "lol":
+                model.addAttribute("currentTeamDtoList", currentTeamService.findAllLoLTeams());
+                System.out.println("LOL teams fetched");
+                break;
+            case "cs":
+            model.addAttribute("currentTeamDtoList", currentTeamService.findAllCsTeams());    
+                System.out.println("CS teams fetched");
+                break;
+            case "cod":
+            model.addAttribute("currentTeamDtoList", currentTeamService.findAllCodTeams());
+                System.out.println("COD teams fetched");    
+                break;
+            case "val":
+            model.addAttribute("currentTeamDtoList", currentTeamService.findAllValTeams());
+                System.out.println("VAL teams fetched");        
+                break;
+            default:
+                break;
+        }
+        return "teams";
+    }
 
     @Autowired
     public CurrentTeamController(CurrentTeamService currentTeamService){
