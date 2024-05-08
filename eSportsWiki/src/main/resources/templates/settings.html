@@ -5,80 +5,78 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Settings</title>
-</head>
-<body style="background-color: #292929;">  
-    <nav class="mynavbar">
-        <ul>
-            <li><a href="/live"><img th:src="@{/images/sfoxlogo.png}" alt="Logo" width="200px" height="200px"/></a></li>
-            <li><a href="/matches">Match History</a></li>
-            <li><a href="/teams">Teams</a></li>
-            <li><a href="/live">Live</a></li>
-            <li><a href="/settings">Account</a></li>
-        </ul>
-    </nav>
-    <nav class="gamebar">
-        <ul>
-            <li id="lol"><img th:src="@{/images/lol.png}" alt="lol" width="100" height="50"></li>
-            <li id="cs"><img th:src="@{/images/csgo.png}" alt="cs" width="100" height="50"></li>
-            <li id="val"><img th:src="@{/images/valorant.png}" alt="val" width="100" height="50"></li>
-            <li id="cod"><img th:src="@{/images/cod.png}" alt="cod" width="100" height="50"></li>
-        </ul>
-    </nav>
-    <script th:src="@{/js/navbar.js}" type="text/javascript"></script>
-
-  <!-- Used for a list of current teams-->
-<table class="table table-dark table-striped table-hover table-active" style="width: 50%; margin: auto;">
-    <thead>
-        <tr>
-            <th scope="col" style="width: 10%;">Acronym</th>
-            <th scope="col">Team Name</th>
-            <th scope="col">Players</th>
-        </tr>
-    </thead>
-    <tbody th:each="currentTeamDto: ${currentTeamDtoList}">
-        <tr>
-            <td th:text="${currentTeamDto.acronym}"></td>
-            <td th:text="${currentTeamDto.name}"></td>
-            <td><a class="mylink" th:href="@{/players/{teamid}/{teamname}(teamid=${currentTeamDto.id}, teamname=${currentTeamDto.name})}">Players</a></td>
-        </tr>
-    </tbody>
-</table>
-
-
-
-</body>
-</html>
-<div class="container">
-    <h2>User Settings</h2>
-        <form>
-            <label for="username">Change Username:</label>
-            <input type="text" id="username" name="username"><br><br>
-            
-            <label for="email">Change Email:</label>
-            <input type="email" id="email" name="email"><br><br>
-
-            <label for="notifications">Enable Notifications:</label>
-            <input type="checkbox" id="notifications" name="notifications"><br><br>
-
-            <a id="passwordlink" href="/users/changepass.html">Change Password</a><br><br>
-
-            <input type="submit" value="Save Changes">
-        </form>
-    </div>
-    <script>
-        // Check if logged in
-        if (typeof localStorage.getItem("username") == 'undefined') {
-            window.location.href = "/users/login.html";
+    <style>
+        .content-wrapper {
+            display: flex;
         }
-
-        // Save changes
-        document.querySelector("form").addEventListener("submit", function(event) {
-            event.preventDefault();
-            // Save changes to db here
-            
-            alert("Changes saved successfully.");
-            window.location.href = "/users/settings.html";
-        });
-    </script>
+        .sidebar {
+            width: 250px;
+            padding: 20px;
+        }
+        .main-content {
+            flex: 1;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body style="background-color: #292929;">
+    <div class="content-wrapper">
+        <div class="sidebar">
+            <nav class="mynavbar">
+                <ul>
+                    <li><a href="/"><img th:src="@{/images/sfoxlogo.png}" alt="Logo" width="200px" height="200px"/></a></li>
+                    <li><a href="/matches">Match History</a></li>
+                    <li><a href="/teams">Teams</a></li>
+                    <li><a href="/live">Live</a></li>
+                    <li><a href="/users/settings">Settings</a></li>
+                    <li><a href="/users/logout">Logout</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="main-content">
+            <nav class="gamebar">
+                <ul>
+                    <li id="lol"><img th:src="@{/images/lol.png}" alt="lol" width="100" height="50"></li>
+                    <li id="cs"><img th:src="@{/images/csgo.png}" alt="cs" width="100" height="50"></li>
+                    <li id="val"><img th:src="@{/images/valorant.png}" alt="val" width="100" height="50"></li>
+                    <li id="cod"><img th:src="@{/images/cod.png}" alt="cod" width="100" height="50"></li>
+                </ul>
+            </nav>
+            <script th:src="@{/js/navbar.js}" type="text/javascript"></script>
+            <div class="container">
+                <h2>User Settings</h2>
+                <div th:if="${successMessage}" class="alert alert-success" role="alert" th:text="${successMessage}"></div>
+                <div th:if="${errorMessage}" class="alert alert-danger" role="alert" th:text="${errorMessage}"></div>
+                <form th:action="@{/users/settings/email}" method="post">
+                    <div class="form-group">
+                        <label for="email">Change Email:</label>
+                        <input type="email" id="email" name="email" th:value="${user.email}" class="form-control" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update Email</button>
+                </form>
+                <hr>
+                <form th:action="@{/users/settings/password}" method="post">
+                    <div class="form-group">
+                        <label for="currentPassword">Current Password:</label>
+                        <input type="password" id="currentPassword" name="currentPassword" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">New Password:</label>
+                        <input type="password" id="newPassword" name="newPassword" class="form-control" required minlength="8">
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm New Password:</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required minlength="8">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Change Password</button>
+                </form>
+                <hr>
+                <h3>Delete Account</h3>
+                <form th:action="@{/users/settings/delete}" method="post" onsubmit="return confirm('Are you sure you want to delete your account?');">
+                    <button type="submit" class="btn btn-danger">Delete Account</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

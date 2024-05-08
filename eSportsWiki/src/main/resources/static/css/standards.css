@@ -149,3 +149,20 @@ body {
     overflow: hidden;
 
 }
+
+.mynavbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.mynavbar li {
+    margin-bottom: 10px;
+}
+
+.mynavbar a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #fff;
+}

@@ -70,7 +70,7 @@ public class UserDAO {
                 );
             }
         } catch (SQLException e) {
-            // Handle exceptions
+            //exceptions
             e.printStackTrace();
         }
 
@@ -113,5 +113,29 @@ public class UserDAO {
             e.printStackTrace();
         }
         return false;
+    }
+
+    public User getUserByEmail(String email) {
+        String sql = "SELECT * FROM users WHERE email = ?";
+
+        try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USERNAME, DB_PASSWORD);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, email);
+            ResultSet rs = pstmt.executeQuery();
+
+            if (rs.next()) {
+                return new User(
+                    rs.getInt("user_id"),
+                    rs.getString("username"),
+                    rs.getString("email"),
+                    rs.getString("password_hash")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

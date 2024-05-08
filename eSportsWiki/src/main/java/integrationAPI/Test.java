@@ -63,13 +63,13 @@ public class Test {
                "location VARCHAR(255)",
                "slug VARCHAR(255)"
        );
-/*        List<String> userColumns = List.of(
+        List<String> userColumns = List.of(
                 "user_id INT AUTO_INCREMENT PRIMARY KEY",
                 "username VARCHAR(30) NOT NULL UNIQUE",
                 "email VARCHAR(255) NOT NULL UNIQUE",
                 "password_hash VARCHAR(60) NOT NULL"
         );
-*/
+
         List<String> matchesColumns = List.of(
                 "begin_at TIMESTAMP",
                 "detailed_stats BOOLEAN",
@@ -95,7 +95,7 @@ public class Test {
 
 
 //         // CREATE TABLES USING TABLE DEFINITIONS FROM ABOVE
-        integrationAPI.CreateTables.createTable("playerlist", playerListColumns);
+         integrationAPI.CreateTables.createTable("playerlist", playerListColumns);
        integrationAPI.CreateTables.createTable("current_videogame", current_videogameColumns);
        integrationAPI.CreateTables.createTable("teaminfo", teamInfoColumns);
        integrationAPI.CreateTables.createTable("codteams", teamInfoColumns);
@@ -111,6 +111,7 @@ public class Test {
        integrationAPI.CreateTables.createTable("lolPastMatches", matchesColumns);
        integrationAPI.CreateTables.createTable("valPastMatches", matchesColumns);
        integrationAPI.CreateTables.createTable("csPastMatches", matchesColumns);
+       CreateTables.createTable("users", userColumns);
 
 //        Filling tables - starting with teaminfo table
 //        Call to fetchDataFromAPI to get the JSONArray

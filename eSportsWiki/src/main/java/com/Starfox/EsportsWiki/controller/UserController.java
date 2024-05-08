@@ -1,6 +1,9 @@
 package com.Starfox.EsportsWiki.controller;
 
 import com.Starfox.EsportsWiki.service.AuthenticationService;
+
+import jakarta.servlet.http.HttpServletRequest;
+
 import com.Starfox.EsportsWiki.dto.RegistrationRequest; 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -80,14 +83,15 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public String loginUser(@RequestParam String username, @RequestParam String password, RedirectAttributes redirectAttributes) {
+    public String loginUser(@RequestParam String username, @RequestParam String password, HttpServletRequest request, RedirectAttributes redirectAttributes) {
         User user = userDAO.getUserByUsername(username);
         if (user != null && authenticationService.verifyPassword(username, password)) {
+            request.getSession().setAttribute("username", username);
             redirectAttributes.addFlashAttribute("successMessage", "Login successful");
-            return "redirect:/dashboard";  //Redirect to dashboard /correct user page
+            return "redirect:/users/settings";
         } else {
             redirectAttributes.addFlashAttribute("errorMessage", "Invalid username or password");
-            return "redirect:/users/login";  //Stay on the login page
+            return "redirect:/users/login";
         }
     }
 
@@ -116,18 +120,99 @@ public class UserController {
         }
     }
 
-    @DeleteMapping("/delete/{userId}")
-    public String deleteUser(@PathVariable int userId, RedirectAttributes redirectAttributes) {
-        boolean isDeleted = userDAO.deleteUser(userId);
-
+    @PostMapping("/settings/delete")
+    public String deleteAccount(HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        String username = (String) request.getSession().getAttribute("username");
+        if (username == null) {
+            return "redirect:/users/login";
+        }
+        User user = userDAO.getUserByUsername(username);
+        if (user == null) {
+            return "redirect:/users/login";
+        }
+        boolean isDeleted = userDAO.deleteUser(user.getUserId());
         if (isDeleted) {
-            redirectAttributes.addFlashAttribute("successMessage", "User deleted successfully");
-            return "redirect:/users";  //Redirect to the user list /correct page
+            request.getSession().invalidate();
+            redirectAttributes.addFlashAttribute("successMessage", "Account deleted successfully");
+            return "redirect:/users/login";
         } else {
-            redirectAttributes.addFlashAttribute("errorMessage", "User not found");
-            return "redirect:/dashboard";  //Redirect back to dashboard or user list
+            redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete account");
+            return "redirect:/users/settings";
         }
     }
 
+    @GetMapping("/settings")
+    public String showSettingsForm(Model model, HttpServletRequest request) {
+        String username = (String) request.getSession().getAttribute("username");
+        if (username == null) {
+            return "redirect:/users/login";
+        }
+        User user = userDAO.getUserByUsername(username);
+        if (user == null) {
+            return "redirect:/users/login";
+        }
+        model.addAttribute("user", user);
+        return "settings";
+    }
+    
+    @PostMapping("/settings/email")
+    public String updateEmail(@RequestParam(required = false) String email, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        String username = (String) request.getSession().getAttribute("username");
+        if (username == null) {
+            return "redirect:/users/login";
+        }
+        User user = userDAO.getUserByUsername(username);
+        if (user == null) {
+            return "redirect:/users/login";
+        }
+        if (email != null && !email.isEmpty()) {
+            if (userDAO.getUserByEmail(email) != null) {
+                redirectAttributes.addFlashAttribute("errorMessage", "Email already exists");
+                return "redirect:/users/settings";
+            }
+            user.setEmail(email);
+            if (userDAO.updateUser(user)) {
+                redirectAttributes.addFlashAttribute("successMessage", "Email updated successfully");
+            } else {
+                redirectAttributes.addFlashAttribute("errorMessage", "Failed to update email");
+            }
+        }
+        return "redirect:/users/settings";
+    }
+    
+    @PostMapping("/settings/password")
+    public String updatePassword(@RequestParam(required = false) String currentPassword, @RequestParam(required = false) String newPassword, @RequestParam(required = false) String confirmPassword, HttpServletRequest request, RedirectAttributes redirectAttributes) {
+        String username = (String) request.getSession().getAttribute("username");
+        if (username == null) {
+            return "redirect:/users/login";
+        }
+        User user = userDAO.getUserByUsername(username);
+        if (user == null) {
+            return "redirect:/users/login";
+        }
+        if (currentPassword != null && newPassword != null && confirmPassword != null && !currentPassword.isEmpty() && !newPassword.isEmpty() && !confirmPassword.isEmpty()) {
+            if (!newPassword.equals(confirmPassword)) {
+                redirectAttributes.addFlashAttribute("errorMessage", "New password and confirm password do not match");
+                return "redirect:/users/settings";
+            }
+            if (authenticationService.verifyPassword(username, currentPassword)) {
+                user.setPasswordHash(authenticationService.hashPassword(newPassword));
+                if (userDAO.updateUser(user)) {
+                    redirectAttributes.addFlashAttribute("successMessage", "Password changed successfully");
+                } else {
+                    redirectAttributes.addFlashAttribute("errorMessage", "Failed to change password");
+                }
+            } else {
+                redirectAttributes.addFlashAttribute("errorMessage", "Current password is incorrect");
+            }
+        }
+        return "redirect:/users/settings";
+    }
+    @GetMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        request.getSession().invalidate();
+        return "redirect:/users/login";
+    }
 
 }
+
