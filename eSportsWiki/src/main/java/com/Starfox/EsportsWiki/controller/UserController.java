@@ -1,19 +1,19 @@
 package com.Starfox.EsportsWiki.controller;
 
 import com.Starfox.EsportsWiki.service.AuthenticationService;
+import com.Starfox.EsportsWiki.service.CurrentTeamService;
+import com.Starfox.EsportsWiki.service.CurrentVideoGameService;
+import com.Starfox.EsportsWiki.service.MatchService;
+import com.Starfox.EsportsWiki.service.PlayerService;
 
 import jakarta.servlet.http.HttpServletRequest;
-
 import com.Starfox.EsportsWiki.dto.RegistrationRequest; 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 import com.Starfox.EsportsWiki.model.User;
 import com.Starfox.EsportsWiki.repository.UserDAO;
-import com.Starfox.EsportsWiki.dto.LoginRequest;
+import com.Starfox.EsportsWiki.repository.UserPreferencesDAO;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,19 +23,29 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Controller  //Changed from @RestController to @Controller
-@RequestMapping("/users")  // Simplified the path for easier form action mapping
+@RequestMapping("/users")  //Simplified the path for easier form action mapping
 public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
     private final AuthenticationService authenticationService;
     private final UserDAO userDAO;
+    private final UserPreferencesDAO userPreferencesDAO;
+    private final CurrentTeamService currentTeamService;
+    private final CurrentVideoGameService currentVideoGameService;
+    private final MatchService matchService;
+    private final PlayerService playerService;
 
-    @Autowired
-    public UserController(AuthenticationService authenticationService, UserDAO userDAO) {
-        this.authenticationService = authenticationService;
-        this.userDAO = userDAO;
-    }
+@Autowired
+public UserController(AuthenticationService authenticationService, UserDAO userDAO, UserPreferencesDAO userPreferencesDAO,CurrentTeamService currentTeamService, CurrentVideoGameService currentVideoGameService,MatchService matchService, PlayerService playerService) {
+    this.authenticationService = authenticationService;
+    this.userDAO = userDAO;
+    this.userPreferencesDAO = userPreferencesDAO;
+    this.currentTeamService = currentTeamService;
+    this.currentVideoGameService = currentVideoGameService;
+    this.matchService = matchService;
+    this.playerService = playerService;
+}
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model) {
@@ -152,6 +162,10 @@ public class UserController {
             return "redirect:/users/login";
         }
         model.addAttribute("user", user);
+        boolean[] preferences = userPreferencesDAO.getUserPreferences(user.getUserId());
+        model.addAttribute("liveDataPreference", preferences[0]);
+        model.addAttribute("teamDataPreference", preferences[1]);
+        model.addAttribute("playerDataPreference", preferences[2]);
         return "settings";
     }
     
@@ -212,6 +226,50 @@ public class UserController {
     public String logout(HttpServletRequest request) {
         request.getSession().invalidate();
         return "redirect:/users/login";
+    }
+
+    @PostMapping("/settings/preferences")
+    public String saveUserPreferences(@RequestParam(required = false) boolean liveData, @RequestParam(required = false) boolean teamData, @RequestParam(required = false) boolean playerData,HttpServletRequest request, RedirectAttributes redirectAttributes) {
+    String username = (String) request.getSession().getAttribute("username");
+        if (username == null) {
+            return "redirect:/users/login";
+        }
+        User user = userDAO.getUserByUsername(username);
+        if (user == null) {
+            return "redirect:/users/login";
+        }
+        userPreferencesDAO.saveUserPreferences(user.getUserId(), liveData, teamData, playerData);
+        redirectAttributes.addFlashAttribute("successMessage", "Preferences saved successfully");
+        return "redirect:/users/settings";
+    }
+
+    @GetMapping("/inbox")
+    public String showInbox(Model model, HttpServletRequest request) {
+        String username = (String) request.getSession().getAttribute("username");
+        if (username == null) {
+            return "redirect:/users/login";
+        }
+        User user = userDAO.getUserByUsername(username);
+        if (user == null) {
+            return "redirect:/users/login";
+        }
+        boolean[] preferences = userPreferencesDAO.getUserPreferences(user.getUserId());
+        model.addAttribute("liveDataPreference", preferences[0]);
+        model.addAttribute("teamDataPreference", preferences[1]);
+        model.addAttribute("playerDataPreference", preferences[2]);
+        if (preferences[0]) {
+            //gets live data using the matchService
+            model.addAttribute("liveData", matchService.findAllRunningMatches());
+        }
+        if (preferences[1]) {
+            //gets team data using the currentTeamService
+            model.addAttribute("teamData", currentTeamService.findAllTeams());
+        }
+        if (preferences[2]) {
+            //gets player data using the playerService
+            model.addAttribute("playerData", playerService.findAll());
+        }
+        return "inbox";
     }
 
 }

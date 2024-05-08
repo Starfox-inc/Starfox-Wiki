@@ -69,6 +69,14 @@ public class Test {
                 "email VARCHAR(255) NOT NULL UNIQUE",
                 "password_hash VARCHAR(60) NOT NULL"
         );
+        List<String> userPreferencesColumns = List.of(
+            "id INT AUTO_INCREMENT PRIMARY KEY",
+            "user_id INT",
+            "live_data BOOLEAN",
+            "team_data BOOLEAN",
+            "player_data BOOLEAN",
+            "FOREIGN KEY (user_id) REFERENCES users(user_id)"
+        );
 
         List<String> matchesColumns = List.of(
                 "begin_at TIMESTAMP",
@@ -112,6 +120,7 @@ public class Test {
        integrationAPI.CreateTables.createTable("valPastMatches", matchesColumns);
        integrationAPI.CreateTables.createTable("csPastMatches", matchesColumns);
        CreateTables.createTable("users", userColumns);
+       CreateTables.createTable("user_preferences", userPreferencesColumns);
 
 //        Filling tables - starting with teaminfo table
 //        Call to fetchDataFromAPI to get the JSONArray

@@ -28,6 +28,7 @@
                     <li><a href="/matches">Match History</a></li>
                     <li><a href="/teams">Teams</a></li>
                     <li><a href="/live">Live</a></li>
+                    <li><a href="/inbox">Inbox</a></li>
                     <li><a href="/users/settings">Settings</a></li>
                     <li><a href="/users/logout">Logout</a></li>
                 </ul>
@@ -69,6 +70,23 @@
                         <input type="password" id="confirmPassword" name="confirmPassword" class="form-control" required minlength="8">
                     </div>
                     <button type="submit" class="btn btn-primary">Change Password</button>
+                </form>
+                <hr>
+                <h3>Notification Preferences</h3>
+                <form th:action="@{/users/settings/preferences}" method="post">
+                    <div class="form-group">
+                        <label for="liveData">Show Live Data:</label>
+                        <input type="checkbox" id="liveData" name="liveData" th:checked="${liveDataPreference}">
+                    </div>
+                    <div class="form-group">
+                        <label for="teamData">Show Team Data:</label>
+                        <input type="checkbox" id="teamData" name="teamData" th:checked="${teamDataPreference}">
+                    </div>
+                    <div class="form-group">
+                        <label for="playerData">Show Player Data:</label>
+                        <input type="checkbox" id="playerData" name="playerData" th:checked="${playerDataPreference}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Save Preferences</button>
                 </form>
                 <hr>
                 <h3>Delete Account</h3>
