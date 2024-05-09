@@ -13,7 +13,7 @@
             <li><a href="/matches">Match History</a></li>
             <li><a href="/teams">Teams</a></li>
             <li><a href="/live">Live</a></li>
-            <li><a href="/inbox">Inbox</a></li>
+            <li><a href="/users/inbox">Inbox</a></li>
             <li><a href="/users/settings">Account</a></li>
         </ul>
     </nav>
@@ -27,7 +27,8 @@
     </nav>
     <script th:src="@{/js/navbar.js}" type="text/javascript"></script>
 
-  <!-- Used for a list of current teams-->
+<!-- Used for a list of current teams-->
+<!--    
 <table class="table table-dark table-striped table-hover table-active" style="width: 50%; margin: auto;">
     <thead>
         <tr>
@@ -44,7 +45,7 @@
         </tr>
     </tbody>
 </table>
-
+-->
 
 
 </body>
@@ -65,7 +66,10 @@
                 <td th:text="${teamMatchDto.leagueName}"></td>
                 <td th:text="${teamMatchDto.name}"></td>
                 <td th:text="|Best of ${teamMatchDto.numberOfGames}|"></td>
-                <td><span th:if="${teamMatchDto.streamList[0] != null}"><a class="mylink" th:href="${teamMatchDto.streamList[0].raw_url}">VOD</a></span></td>
+                <td>
+                    <span th:if="${#lists.isEmpty(teamMatchDto.streamList)}" >No link</a></span>
+                    <span th:unless="${#lists.isEmpty(teamMatchDto.streamList)}" ><a class="mylink" th:href="${teamMatchDto.streamList[0].raw_url}">VOD</a></span>                    
+                </td>
             </tr>
         </tbody>
     </table>

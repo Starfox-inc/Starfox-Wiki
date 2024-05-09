@@ -1,5 +1,26 @@
 package com.Starfox.EsportsWiki.controller;
 
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.Starfox.EsportsWiki.dto.RegistrationRequest;
+import com.Starfox.EsportsWiki.model.User;
+import com.Starfox.EsportsWiki.repository.UserDAO;
+import com.Starfox.EsportsWiki.repository.UserPreferencesDAO;
 import com.Starfox.EsportsWiki.service.AuthenticationService;
 import com.Starfox.EsportsWiki.service.CurrentTeamService;
 import com.Starfox.EsportsWiki.service.CurrentVideoGameService;
@@ -7,20 +28,6 @@ import com.Starfox.EsportsWiki.service.MatchService;
 import com.Starfox.EsportsWiki.service.PlayerService;
 
 import jakarta.servlet.http.HttpServletRequest;
-import com.Starfox.EsportsWiki.dto.RegistrationRequest; 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.Starfox.EsportsWiki.model.User;
-import com.Starfox.EsportsWiki.repository.UserDAO;
-import com.Starfox.EsportsWiki.repository.UserPreferencesDAO;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import javax.validation.Valid;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 @Controller  //Changed from @RestController to @Controller
 @RequestMapping("/users")  //Simplified the path for easier form action mapping
@@ -157,6 +164,7 @@ public UserController(AuthenticationService authenticationService, UserDAO userD
         if (username == null) {
             return "redirect:/users/login";
         }
+        System.out.println(username);
         User user = userDAO.getUserByUsername(username);
         if (user == null) {
             return "redirect:/users/login";

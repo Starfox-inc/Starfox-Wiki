@@ -15,7 +15,7 @@
             <li><a href="/matches">Match History</a></li>
             <li><a href="/teams">Teams</a></li>
             <li><a href="/live">Live</a></li>
-            <li><a href="/inbox">Inbox</a></li>
+            <li><a href="/users/inbox">Inbox</a></li>
             <li><a href="/users/settings">Account</a></li>
         </ul>
     </nav>
@@ -44,7 +44,10 @@
             <td th:text="|${matchDto.name} in ${matchDto.leagueName}|"></td>
             <td th:text="|Best of ${matchDto.numberOfGames}|"></td>
             <td th:text="|Started at ${matchDto.begin_at}|"></td>
-            <td><span th:if="${matchDto.streamList[0] != null}"><a class="mylink" th:href="${matchDto.streamList[0].raw_url}">Watch Live</a></span></td>
+            <td>
+                <span th:if="${#lists.isEmpty(matchDto.streamList)}" >No link</a></span>
+                <span th:unless="${#lists.isEmpty(matchDto.streamList)}" ><a class="mylink" th:href="${matchDto.streamList[0].raw_url}">VOD</a></span>                    
+            </td>
             <!--<td><span th:if="${matchDto.streamList[0] != null}"><video id="video"><source type="video/youtube" src="${matchDto.streamList[0].raw_url}"></source></video></span></td>
             <script>
                 var player = new MediaElementPlayer('video', {

@@ -1,6 +1,10 @@
 package com.Starfox.EsportsWiki.repository;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 import org.springframework.stereotype.Repository;
 
@@ -35,7 +39,7 @@ public class UserPreferencesDAO {
     public boolean[] getUserPreferences(int userId) {
         String query = "SELECT live_data, team_data, player_data FROM user_preferences WHERE user_id = ?";
         boolean[] preferences = new boolean[3];
-
+        System.out.println("1");
         try (Connection conn = DriverManager.getConnection(JDBC_URL, DB_USERNAME, DB_PASSWORD);
              PreparedStatement stmt = conn.prepareStatement(query)) {
 

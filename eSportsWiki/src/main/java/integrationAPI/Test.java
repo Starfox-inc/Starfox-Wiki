@@ -71,7 +71,7 @@ public class Test {
         );
         List<String> userPreferencesColumns = List.of(
             "id INT AUTO_INCREMENT PRIMARY KEY",
-            "user_id INT",
+            "user_id INT UNIQUE",
             "live_data BOOLEAN",
             "team_data BOOLEAN",
             "player_data BOOLEAN",
@@ -103,7 +103,7 @@ public class Test {
 
 
 //         // CREATE TABLES USING TABLE DEFINITIONS FROM ABOVE
-         integrationAPI.CreateTables.createTable("playerlist", playerListColumns);
+       integrationAPI.CreateTables.createTable("playerlist", playerListColumns);
        integrationAPI.CreateTables.createTable("current_videogame", current_videogameColumns);
        integrationAPI.CreateTables.createTable("teaminfo", teamInfoColumns);
        integrationAPI.CreateTables.createTable("codteams", teamInfoColumns);

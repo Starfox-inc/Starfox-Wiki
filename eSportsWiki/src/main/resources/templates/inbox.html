@@ -4,50 +4,6 @@
     <link rel="stylesheet" type="text/css" th:href="@{/css/standards.css}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <title>Past Matches</title>
-</head>
-<body style="background-color: #292929;">  
-    <nav class="mynavbar">
-        <ul>
-            <li><a href="/live"><img th:src="@{/images/sfoxlogo.png}" alt="Logo" width="200px" height="200px"/></a></li>
-            <li><a href="/matches">Match History</a></li>
-            <li><a href="/teams">Teams</a></li>
-            <li><a href="/live">Live</a></li>
-            <li><a href="/inbox">Inbox</a></li>
-            <li><a href="/users/settings">Account</a></li>
-        </ul>
-    </nav>
-    <nav class="gamebar">
-        <ul>
-            <li id="lol"><img th:src="@{/images/lol.png}" alt="lol" width="100" height="50"></li>
-            <li id="cs"><img th:src="@{/images/csgo.png}" alt="cs" width="100" height="50"></li>
-            <li id="val"><img th:src="@{/images/valorant.png}" alt="val" width="100" height="50"></li>
-            <li id="cod"><img th:src="@{/images/cod.png}" alt="cod" width="100" height="50"></li>
-        </ul>
-    </nav>
-    <script th:src="@{/js/navbar.js}" type="text/javascript"></script>
-
-    <div style="display: flex; justify-content: center; align-items: center; height: 50vh;">
-        <h1 style="color: aliceblue;">No Messages</h1>
-    </div>
-
-
-</body>
-</html>
-
-
-
-
-
-<!-- Below brekas the inbox html so leave uncommented unless trying to fix-->
-
-<!--
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" th:href="@{/css/standards.css}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <title>Inbox</title>
 </head>
 <body style="background-color: #292929;">  
@@ -57,7 +13,7 @@
             <li><a href="/matches">Match History</a></li>
             <li><a href="/teams">Teams</a></li>
             <li><a href="/live">Live</a></li>
-            <li><a href="/inbox">Inbox</a></li>
+            <li><a href="/users/inbox">Inbox</a></li>
             <li><a href="/users/settings">Account</a></li>
         </ul>
     </nav>
@@ -71,7 +27,7 @@
     </nav>
     <script th:src="@{/js/navbar.js}" type="text/javascript"></script>
 
-    <div class="container">
+    <div class="container" style="display: flex; justify-content: center; flex-direction: column; align-items: center;">
         <h1>Inbox</h1>
         
         <div th:if="${liveDataPreference}">
@@ -81,12 +37,17 @@
                     <tr>
                         <th>Match ID</th>
                         <th>Match Name</th>
+                        <th>Watch Match</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr th:each="match : ${liveData}">
                         <td th:text="${match.id}"></td>
                         <td th:text="${match.name}"></td>
+                        <td>
+                            <span th:if="${#lists.isEmpty(match.streamList)}" >No link</a></span>
+                            <span th:unless="${#lists.isEmpty(match.streamList)}" ><a class="mylink" th:href="${match.streamList[0].raw_url}">VOD</a></span>                    
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -128,10 +89,13 @@
             </table>
         </div>
         
-        <div th:if="${!liveDataPreference && !teamDataPreference && !playerDataPreference}">
-            <p>No data to display based on your preferences.</p>
+        
+        <div th:if=" (not ${liveDataPreference}) and (not ${teamDataPreference}) and (not ${playerDataPreference})" >
+            <h1>No data to display based on your preferences.</h1>
         </div>
+        
+    
     </div>
 
 </body>
-</html>-->
+</html>
